@@ -1,17 +1,13 @@
-// 목데이터. 백엔드 붙으면 이 파일만 교체.
-// 데드라인은 "지금" 기준 상대 시각으로 생성 → 언제 열어도 달력에 배터리 단계가 골고루 보이게.
+// 목데이터 — Hearth/ScheduleCard 컴포넌트 프로토타입용.
+// value(태우면 불씨에 더해질 양)는 임시 고정값. 계산 규칙은 design.md 4장 "아직 안 정한 것" 참조.
 
-const now = new Date()
-const h = (n) => new Date(now.getTime() + n * 60 * 60 * 1000).toISOString()
-const d = (n) => new Date(now.getTime() + n * 24 * 60 * 60 * 1000).toISOString()
+export const todaySchedules = [
+  { id: 't1', time: '09:00', title: '아침 스트레칭', value: 18, done: false },
+  { id: 't2', time: '15:00', title: '치과 예약', value: 15, done: false },
+  { id: 't3', time: '20:00', title: '팀 회의 자료', value: 20, done: false },
+]
 
-export const mockSchedules = [
-  { id: 'm1', title: '치과 예약', deadline: h(3), done: false }, // 오늘, 빨강
-  { id: 'm2', title: '팀 회의', deadline: h(28), done: false }, // 내일, 빨강~노랑
-  { id: 'm3', title: '월세 이체', deadline: d(3), done: false }, // 3일 뒤, 노랑
-  { id: 'm4', title: '친구 생일 저녁', deadline: d(6), done: false }, // 6일 뒤, 노랑~편안
-  { id: 'm5', title: '건강검진', deadline: d(12), done: false }, // 12일 뒤, 편안(7일 밖)
-  { id: 'm6', title: '부모님 방문', deadline: d(20), done: false }, // 20일 뒤, 편안
-  { id: 'm7', title: '장보기', deadline: h(-20), done: false }, // 지남 + 미완료 = 놓침
-  { id: 'm8', title: '운동', deadline: h(-4), done: true }, // 완료 = 회색
+export const tomorrowSchedules = [
+  { id: 'm1', time: '11:00', title: '세탁물 찾기', value: 12, done: false },
+  { id: 'm2', time: '19:00', title: '친구 생일 저녁', value: 16, done: false },
 ]
