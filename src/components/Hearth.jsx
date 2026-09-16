@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 import Pyre from './Pyre.jsx'
+import { EMBER } from '../theme/colors.js'
 
 // 불꽃 게이지. 순수 표시 컴포넌트 — 로직 없음 (design.md 2장)
 // level만큼 위에서부터 드러나고, 나머지는 카드색 마스크로 덮여 있음(불의 밑동이 제일 세게 타므로
@@ -19,12 +20,12 @@ const Hearth = forwardRef(function Hearth({ level, floor = 12, flaring = false }
       className="relative h-40 w-full overflow-hidden rounded-lg border border-border bg-pit"
     >
       <Pyre
-        soot="#15110C"
-        ember="#E8380D"
-        flame="#FF5A1F"
-        spark="#FFB800"
+        soot={EMBER.soot}
+        ember={EMBER.deep}
+        flame={EMBER.core}
+        spark={EMBER.gold}
         exposure={flaring ? 15 : 10}
-        glow={{ color: '#FF5A1F', strength: flaring ? 10 : 6 }}
+        glow={{ color: EMBER.core, strength: flaring ? 10 : 6 }}
         style={{ position: 'absolute', inset: 0 }}
       />
 

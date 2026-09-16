@@ -3,6 +3,7 @@
 > 이 문서는 컨셉 재설계([SESSION-RULES.md](./SESSION-RULES.md) "재기획 진행 중" + 메모리 `day-battery-concept-pivot`)를 화면·컴포넌트 레벨로 구체화한 것.
 > 색·타입·컴포넌트 경계는 여기가 기준. 바꿀 땐 이 파일부터 고치고, 코드는 그다음.
 > Artifact로 통째로 다시 그리는 건 그만 — 이 문서 기준으로 컴포넌트 단위로 고친다.
+> **모바일 우선.** 이 앱은 폰에서 짧게 여러 번 열어보는 용도 — 데스크탑 너비는 "안 깨지면 됨" 수준, 실제 기준은 폰 화면. (2026-09-15 갱신)
 
 ---
 
@@ -19,7 +20,7 @@
 
 ### 1.1 색 — 비비드 버전
 
-라이트 배경 고정 (어두운 밤색·글로우 히어로 없음 — 확정됨). 액센트는 확실히 채도 높게.
+라이트 배경 고정 (어두운 밤색·글로우 히어로 없음 — 확정됨). 액센트는 확실히 채도 높게 — **덱빌딩 게임 카드·불꽃이라는 비주얼 자체가 게임적이라, 여기서 채도를 낮추면 오히려 어중간해짐. 비비드 유지가 방침.**
 
 | 토큰 | 값 | 용도 |
 |---|---|---|
@@ -56,6 +57,15 @@
 
 프로젝트가 이미 Tailwind v4라 위 토큰은 `tailwind.config`나 `@theme` 블록에 CSS 변수로 등록해서 `bg-[--ember-2]` 식으로 쓰거나, `@theme` 확장으로 `bg-ember-core` 같은 유틸을 만든다. 하드코딩 hex를 컴포넌트에 흩뿌리지 않기.
 
+### 1.5 모바일 대응 (신규, 2026-09-15)
+
+- **뷰포트**: `index.html`에 `viewport-fit=cover` 추가함(완료) — 아이폰 노치/홈 인디케이터 대응용 `env(safe-area-inset-*)`를 쓰려면 이게 먼저 있어야 함.
+- **세이프 에어리어**: 페이지 최상단 컨테이너(`App.jsx`의 `.stage`)의 아래쪽 패딩에 `env(safe-area-inset-bottom)`을 더해준다. 나중에 화면 하단에 "일정 추가" 버튼 같은 고정 UI가 생기면 특히 중요.
+- **터치 타깃 최소 44px**: `ScheduleCard`는 카드 전체가 버튼이라 이미 충분히 큼(문제없음). 앞으로 작은 아이콘 버튼을 추가할 땐 44px 미만으로 만들지 않기.
+- **hover에 기능을 얹지 않는다**: 폰은 hover가 없음. `ScheduleCard`의 `hover:-translate-y-0.5`는 데스크탑 보너스일 뿐, **실제 피드백은 `active:scale-[.97]`(누르는 순간 살짝 눌리는 느낌)로 낸다** — 이게 메인, hover는 있으면 좋은 것.
+- **기준 폭 375px**(아이폰 SE/미니급, 제일 좁은 흔한 폭). 여기서 안 깨지면 나머지는 다 됨. 데스크탑은 지금처럼 `max-w-[440px]`로 가운데 정렬해서 폰처럼 보이게 유지(태블릿/데스크탑용 별도 레이아웃 안 만듦).
+- **오늘 카드 여러 장 → 가로 스크롤로 전환** (자세한 내용은 2장 `ScheduleHand` 참조). 375px 폭에서 카드 3장이 한 줄에 다 안 들어가서(카드 112px×3+간격 ≈ 356px > 가용폭 ~307px), `flex-wrap`으로 두 줄 되는 대신 가로로 스와이프하는 "카드 패"처럼 만드는 게 덱빌딩 컨셉에도 더 맞음.
+
 ---
 
 ## 2. 컴포넌트 인벤토리
@@ -70,12 +80,14 @@ src/components/
 
 ### `<Hearth level floor flaring />`
 - **순수 표시 컴포넌트, 로직 없음.**
-- 구조: 원형 링(레벨만큼 채워지는 `conic-gradient`) → 안쪽 `--pit` 원 → 그 안에 glow 레이어(레벨에 비례해 scale/opacity).
+- 구조 (2026-09-10 원형 → 사각 패널로 변경, 문서 갱신 안 돼 있던 것 지금 반영): 칸 전체를 채우는 사각 패널(높이 `h-40`, 모바일에서도 폭 100%라 안전). 안에 `Pyre`(Three.js 절차적 불 셰이더) 렌더 + 그 위에 `level`만큼 아래에서부터 드러나는 마스크(나머지는 카드색으로 덮음, 밑동이 제일 세게 타므로 레벨 오를수록 아래까지 드러나는 게 "불이 커진다"는 느낌).
+- ⚠️ **이 그래픽 자체가 최종이 아님** — "사각 프레임 경계가 너무 티 난다"는 피드백으로 PixelLab 픽셀아트 레벨별 이미지 스왑으로 교체 예정(PixelLab 크레딧 문제로 대기 중, HANDOFF.md 참조). 대체되면 이 항목도 다시 고칠 것.
 - props
   - `level: number` (0~100)
   - `floor: number` (최저치, 기본 12 — 이 밑으로 절대 안 내려감은 부모가 보장, Hearth는 그냥 받은 값을 그림)
-  - `flaring: boolean` — true인 순간 0.5초 밝아지는 pulse 재생
+  - `flaring: boolean` — true인 순간 밝기 상승(현재 구현은 Pyre의 `exposure`/`glow.strength`를 순간적으로 올리는 방식)
 - 접근성: 루트에 `role="meter"`, `aria-valuenow={level}`, `aria-valuemin={floor}`, `aria-valuemax={100}`.
+- 모바일: 사각 패널이라 반응형으로 자연 대응됨(폭 100%). 별도 처리 불필요.
 
 ### `<ScheduleCard time title value state onResolve />`
 - props
@@ -83,11 +95,13 @@ src/components/
   - `state: 'idle' | 'cracking' | 'thrown'`
   - `onResolve(value)` — 크랙 연출(300ms) 끝난 시점에 호출. **던지는 애니메이션(불씨까지 날아가는 것)은 부모가 좌표를 알아야 하므로 ScheduleHand가 처리.**
 - 클릭 시 내부적으로 `state='cracking'` → 300ms 후 `onResolve` 호출 → 부모가 `state='thrown'`으로 바꿔주면 그때 날아가는 애니메이션 재생.
+- 모바일: 주 피드백은 `active:scale-[.97]`(누르는 순간 반응) — `hover:-translate-y-0.5`는 데스크탑 보너스일 뿐 기능적으로 의존하지 않는다.
 
 ### `<ScheduleHand items onCardResolved />`
 - 오늘 카드 배열을 렌더.
 - 각 카드의 `onResolve`를 받아서: 카드 DOM 좌표 → Hearth DOM 좌표(ref로 전달받음) 계산 → 던지기 애니메이션 실행 → 끝나면 카드 제거 + `onCardResolved(value)` 호출(부모가 level 갱신).
 - Hearth와 같은 부모(DayCell)를 공유해야 좌표 계산이 되므로, Hearth ref는 DayCell에서 내려받는다.
+- **레이아웃 = 가로 스크롤 카드 패(모바일 대응, 2026-09-15)**: 지금 구현(`flex-wrap`)은 375px 폭에서 카드 3장이 두 줄로 밀림. `overflow-x-auto` + `snap-x snap-mandatory`(각 카드 `snap-start`)로 바꿔서, 카드가 몇 장이든 한 줄로 유지하고 옆으로 스와이프해서 보게 한다. 덱빌딩 게임의 "손패"에 더 맞는 모양이기도 함. 데스크탑에서도 그대로 유지(한 줄이 안 넘치면 스크롤 자체가 안 보임).
 
 ### `<DayCell date items level floor variant />`
 - `variant: 'today' | 'tomorrow'`

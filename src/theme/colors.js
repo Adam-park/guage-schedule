@@ -1,12 +1,9 @@
-// 배터리 단계별 색 토큰. HEX 최종값은 미결(스크린샷 보고 튜닝) — 지금은 임시값.
-// batteryStage() 가 돌려주는 문자열 -> { fill: 채워진 부분, track: 빈 부분 }
-
-const RED = { fill: '#ef4444', track: '#fee2e2' }
-
-export const STAGE_COLORS = {
-  calm: { fill: '#2dd4bf', track: '#ccfbf1' }, // 청록 (여유)
-  warn: { fill: '#facc15', track: '#fef9c3' }, // 노랑 (다가옴)
-  urgent: RED, // 빨강 (임박)
-  empty: RED, // 텅 빔 / 놓침 — urgent와 동일
-  frozen: { fill: '#9ca3af', track: '#f3f4f6' }, // 회색 (완료)
+// design.md 1.1의 색 토큰과 반드시 같은 값을 유지할 것 — 진짜 원본은 src/index.css의 @theme 블록.
+// 이 파일은 CSS 변수를 못 읽는 곳(Pyre.jsx의 Three.js)에서만 쓴다. 값 하나를 두 번 타이핑하지 않으려고
+// 만든 단일 출처 — 색 바꿀 땐 여기랑 index.css 딱 두 곳만 고치면 됨.
+export const EMBER = {
+  soot: '#15110C', // --color-pit
+  deep: '#E8380D', // --color-ember-1
+  core: '#FF5A1F', // --color-ember-2
+  gold: '#FFB800', // --color-ember-3
 }
