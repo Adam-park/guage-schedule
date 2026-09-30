@@ -1,6 +1,14 @@
 @import 'tailwindcss';
 
+/* 픽셀 느낌 텍스트용 한글 폰트 — PixelLab은 한글 미지원이라 실제 폰트로 적용 (갈무리) */
+@font-face {
+  font-family: 'Galmuri11';
+  src: url('/fonts/Galmuri11.ttf') format('truetype');
+  font-display: swap;
+}
+
 @theme {
+  --font-pixel: 'Galmuri11', -apple-system, sans-serif;
   --color-bg: #ffffff;
   --color-surface: #ffffff;
   --color-surface-sunken: #f6f4ef;
@@ -15,6 +23,11 @@
   --color-pit-ring: #d9cda9;
   --color-rain: #0ea5e9;
   --color-buff: #ffd23f;
+
+  /* 반송함 컨셉 상태색 (04 결정카드, CONCEPT.md 3장 참조) — 위 ember 계열과 별개, design.md 미반영 상태 */
+  --color-state-due: #2563eb;
+  --color-state-returned: #b45309;
+  --color-state-delivered: #15803d;
 }
 
 :root {
