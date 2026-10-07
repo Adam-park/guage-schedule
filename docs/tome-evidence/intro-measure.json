@@ -1,0 +1,147 @@
+{
+ "rows": [
+  {
+   "tag": "DIV",
+   "text": "",
+   "x": 0,
+   "y": 0,
+   "w": 375,
+   "h": 667,
+   "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+   "fontSize": "16px",
+   "fontWeight": "400",
+   "lineHeight": "24px",
+   "letterSpacing": "normal",
+   "color": "rgb(21, 18, 13)",
+   "bg": "rgba(0, 0, 0, 0)",
+   "padding": "0px 16px",
+   "margin": "0px",
+   "radius": "0px",
+   "border": "0px solid",
+   "shadow": "none",
+   "opacity": "1",
+   "textTransform": "none"
+  },
+  {
+   "tag": "DIV",
+   "text": "",
+   "x": 115.5,
+   "y": 255.5,
+   "w": 144,
+   "h": 68,
+   "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+   "fontSize": "16px",
+   "fontWeight": "400",
+   "lineHeight": "24px",
+   "letterSpacing": "normal",
+   "color": "rgb(21, 18, 13)",
+   "bg": "rgba(0, 0, 0, 0)",
+   "padding": "0px",
+   "margin": "0px",
+   "radius": "0px",
+   "border": "0px solid",
+   "shadow": "none",
+   "opacity": "1",
+   "textTransform": "none"
+  },
+  {
+   "tag": "H1",
+   "text": "TO ME",
+   "x": 115.5,
+   "y": 255.5,
+   "w": 144,
+   "h": 40,
+   "fontFamily": "Galmuri11, -apple-system, sans-serif",
+   "fontSize": "36px",
+   "fontWeight": "400",
+   "lineHeight": "40px",
+   "letterSpacing": "5.4px",
+   "color": "rgb(21, 18, 13)",
+   "bg": "rgba(0, 0, 0, 0)",
+   "padding": "0px",
+   "margin": "0px",
+   "radius": "0px",
+   "border": "0px solid",
+   "shadow": "none",
+   "opacity": "1",
+   "textTransform": "none"
+  },
+  {
+   "tag": "P",
+   "text": "나를 완성하는 시간",
+   "x": 125.65625,
+   "y": 303.5,
+   "w": 123.671875,
+   "h": 20,
+   "fontFamily": "Galmuri11, -apple-system, sans-serif",
+   "fontSize": "14px",
+   "fontWeight": "400",
+   "lineHeight": "20px",
+   "letterSpacing": "normal",
+   "color": "rgb(110, 102, 86)",
+   "bg": "rgba(0, 0, 0, 0)",
+   "padding": "0px",
+   "margin": "8px 0px 0px",
+   "radius": "0px",
+   "border": "0px solid",
+   "shadow": "none",
+   "opacity": "1",
+   "textTransform": "none"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Start",
+   "x": 16,
+   "y": 363.5,
+   "w": 343,
+   "h": 48,
+   "fontFamily": "Galmuri11, -apple-system, sans-serif",
+   "fontSize": "14px",
+   "fontWeight": "400",
+   "lineHeight": "20px",
+   "letterSpacing": "normal",
+   "color": "rgb(255, 255, 255)",
+   "bg": "rgb(21, 18, 13)",
+   "padding": "14px 0px",
+   "margin": "40px 0px 0px",
+   "radius": "8px",
+   "border": "0px solid",
+   "shadow": "none",
+   "opacity": "1",
+   "textTransform": "none"
+  }
+ ],
+ "fontsLoaded": [
+  "Nunito Sans 400 unloaded",
+  "Nunito Sans 400 unloaded",
+  "Nunito Sans 700 unloaded",
+  "Nunito Sans 700 unloaded",
+  "Galmuri11 normal loaded"
+ ],
+ "platform": {
+  "#storybook-root h1": [
+   {
+    "familyName": "Galmuri11 Regular",
+    "postScriptName": "Galmuri11-Regular",
+    "isCustomFont": true,
+    "glyphCount": 5
+   }
+  ],
+  "#storybook-root p": [
+   {
+    "familyName": "Galmuri11 Regular",
+    "postScriptName": "Galmuri11-Regular",
+    "isCustomFont": true,
+    "glyphCount": 10
+   }
+  ],
+  "#storybook-root button": [
+   {
+    "familyName": "Galmuri11 Regular",
+    "postScriptName": "Galmuri11-Regular",
+    "isCustomFont": true,
+    "glyphCount": 5
+   }
+  ]
+ }
+}

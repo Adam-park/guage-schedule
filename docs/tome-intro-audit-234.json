@@ -1,0 +1,389 @@
+{
+ "total": 36,
+ "failed": 0,
+ "errors": [],
+ "checks": [
+  {
+   "stage": "정리",
+   "item": "목록에 TO ME 외 스토리 수",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "BrandTitle h1 = pixel/display + text/primary",
+   "expected": [
+    "36px",
+    "40px",
+    "5.4px",
+    "Galmuri11",
+    "rgb(21, 18, 13)"
+   ],
+   "actual": [
+    "36px",
+    "40px",
+    "5.4px",
+    "Galmuri11",
+    "rgb(21, 18, 13)"
+   ],
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "BrandTitle p = pixel/body + text/secondary",
+   "expected": [
+    "14px",
+    "20px",
+    "Galmuri11",
+    "rgb(110, 102, 86)"
+   ],
+   "actual": [
+    "14px",
+    "20px",
+    "Galmuri11",
+    "rgb(110, 102, 86)"
+   ],
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "속성 title → h1에 반영",
+   "expected": "HELLO",
+   "actual": "HELLO",
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "속성 tagline → p에 반영",
+   "expected": "TEST",
+   "actual": "TEST",
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "showTagline=false → 부제 없음",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "PixelButton = bg/action-primary + text/on-action + pixel/body + space/3-5 + radius/lg",
+   "expected": [
+    "rgb(21, 18, 13)",
+    "rgb(255, 255, 255)",
+    "14px",
+    "20px",
+    "Galmuri11",
+    "14px 0px",
+    "8px",
+    343,
+    48
+   ],
+   "actual": [
+    "rgb(21, 18, 13)",
+    "rgb(255, 255, 255)",
+    "14px",
+    "20px",
+    "Galmuri11",
+    "14px 0px",
+    "8px",
+    343,
+    48
+   ],
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "긴 문구: 가로 넘침 없음 (scrollWidth ≤ clientWidth)",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "긴 문구: 폭 유지 343",
+   "expected": 343,
+   "actual": 343,
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "PixelEnvelope 원본 자산 로드 (96x112)",
+   "expected": [
+    "96x112",
+    "96x112"
+   ],
+   "actual": [
+    "96x112",
+    "96x112"
+   ],
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "PixelEnvelope 정수배 크기 1x/2x",
+   "expected": [
+    [
+     96,
+     112
+    ],
+    [
+     192,
+     224
+    ]
+   ],
+   "actual": [
+    [
+     96,
+     112
+    ],
+    [
+     192,
+     224
+    ]
+   ],
+   "pass": true
+  },
+  {
+   "stage": "2",
+   "item": "PixelEnvelope pixelated",
+   "expected": [
+    "pixelated",
+    "pixelated"
+   ],
+   "actual": [
+    "pixelated",
+    "pixelated"
+   ],
+   "pass": true
+  },
+  {
+   "stage": "3",
+   "item": "화면 크기 375x667",
+   "expected": [
+    [
+     375,
+     667
+    ],
+    [
+     375,
+     667
+    ]
+   ],
+   "actual": [
+    [
+     375,
+     667
+    ],
+    [
+     375,
+     667
+    ]
+   ],
+   "pass": true
+  },
+  {
+   "stage": "3",
+   "item": "조립본과 원본의 다른 픽셀 수",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "시안 수 (Before + A·B·C)",
+   "expected": 4,
+   "actual": 4,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "Before · 현재: 화면 밖으로 나간 요소",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "Before · 현재: 글자 넘침",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "Before · 현재: 글꼴 갈무리11만 (픽셀 방향 유지)",
+   "expected": [
+    "Galmuri11"
+   ],
+   "actual": [
+    "Galmuri11"
+   ],
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "Before · 현재: 브랜드 메시지 위치 유지",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "Before · 현재: 버튼 343x48",
+   "expected": [
+    343,
+    48
+   ],
+   "actual": [
+    343,
+    48
+   ],
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "A · 봉투 한 장: 화면 밖으로 나간 요소",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "A · 봉투 한 장: 글자 넘침",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "A · 봉투 한 장: 글꼴 갈무리11만 (픽셀 방향 유지)",
+   "expected": [
+    "Galmuri11"
+   ],
+   "actual": [
+    "Galmuri11"
+   ],
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "A · 봉투 한 장: 브랜드 메시지 위치 유지",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "A · 봉투 한 장: 버튼 343x48",
+   "expected": [
+    343,
+    48
+   ],
+   "actual": [
+    343,
+    48
+   ],
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "B · 사용법 한 줄: 화면 밖으로 나간 요소",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "B · 사용법 한 줄: 글자 넘침",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "B · 사용법 한 줄: 글꼴 갈무리11만 (픽셀 방향 유지)",
+   "expected": [
+    "Galmuri11"
+   ],
+   "actual": [
+    "Galmuri11"
+   ],
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "B · 사용법 한 줄: 브랜드 메시지 위치 유지",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "B · 사용법 한 줄: 버튼 343x48",
+   "expected": [
+    343,
+    48
+   ],
+   "actual": [
+    343,
+    48
+   ],
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "C · 주소 라벨: 화면 밖으로 나간 요소",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "C · 주소 라벨: 글자 넘침",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "C · 주소 라벨: 글꼴 갈무리11만 (픽셀 방향 유지)",
+   "expected": [
+    "Galmuri11"
+   ],
+   "actual": [
+    "Galmuri11"
+   ],
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "C · 주소 라벨: 브랜드 메시지 위치 유지",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "stage": "4",
+   "item": "C · 주소 라벨: 버튼 343x48",
+   "expected": [
+    343,
+    48
+   ],
+   "actual": [
+    343,
+    48
+   ],
+   "pass": true
+  },
+  {
+   "stage": "공통",
+   "item": "페이지 오류",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  }
+ ]
+}

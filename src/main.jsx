@@ -17,10 +17,13 @@ const params = new URLSearchParams(window.location.search)
 const isCompare = params.get('compare') === '1'
 const screen = params.get('screen')
 
+// TO ME 흐름: 인트로 → 온보딩 → 편지 작성
+const go = (next) => () => (window.location.search = `?screen=${next}`)
+
 let content = <App />
 if (isCompare) content = <ComparePage />
-else if (screen === 'intro') content = <IntroScreen onStart={() => alert('Start 눌림 (다음 화면은 아직 없음)')} />
-else if (screen === 'onboarding') content = <OnboardingScreen />
+else if (screen === 'intro') content = <IntroScreen onStart={go('onboarding')} />
+else if (screen === 'onboarding') content = <OnboardingScreen onDone={go('letter-write')} />
 else if (screen === 'photo') content = <PhotoSetupScreen />
 else if (screen === 'me') content = <MeBookScreen />
 else if (screen === 'letter-preview') content = <LetterPreviewScreen />

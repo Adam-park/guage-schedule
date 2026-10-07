@@ -1,0 +1,126 @@
+{
+  "updatedAt": "2026-10-07",
+  "tool": "Storybook 10.6 (http://localhost:6006) — Figma MCP Starter 한도(월 20회) 도달로 대체. 근거: 강의 PDF 50~51쪽",
+  "source": {
+    "screen": "src/screens/IntroScreen.jsx",
+    "state": "기본 상태 1개 (TO ME + 나를 완성하는 시간 + Start 버튼)",
+    "commit": "5a15e35 (작업 트리 기준)",
+    "storybook": {
+      "screen": "0-to-me-화면--intro",
+      "foundation": "0-to-me-1-foundation-인트로--tokens"
+    }
+  },
+  "platform": {
+    "type": "mobile web",
+    "display": "콘텐츠만 (브라우저 UI·기기 프레임 없음)",
+    "viewport": "375x667 portrait",
+    "containerMaxWidth": 440,
+    "note": "375에서 콘텐츠 폭 343 (좌우 16)"
+  },
+  "criteria": {
+    "designMd": "design.md 1장 토큰 (2·3·6장은 과거 시안)",
+    "conceptMd": "CONCEPT.md",
+    "coaching": "docs/coaching/2026-10-07-instructor-feedback.md — 전제: 픽셀 방향 유지, '나를 완성' 문구는 브랜드 메시지로만, 사용법을 빠르고 재밌게",
+    "implementation": "src/index.css @theme + @font-face Galmuri11"
+  },
+  "tokensFile": "src/storybook/tomeIntroTokens.js",
+  "primitives": {
+    "color/white": {
+      "cssVar": "--color-white",
+      "value": "#ffffff",
+      "source": "Tailwind 기본 테마"
+    },
+    "color/ink/900": {
+      "cssVar": "--color-ink",
+      "value": "#15120d"
+    },
+    "color/ink/600": {
+      "cssVar": "--color-ink-dim",
+      "value": "#6e6656"
+    }
+  },
+  "semantic": {
+    "bg/page": "color/white",
+    "text/primary": "color/ink/900",
+    "text/secondary": "color/ink/600",
+    "bg/action-primary": "color/ink/900",
+    "text/on-action": "color/white"
+  },
+  "textStyles": {
+    "pixel/display": {
+      "font": "Galmuri11 Regular",
+      "size": 36,
+      "weight": 400,
+      "lineHeight": "40px",
+      "letterSpacing": "0.15em (5.4px)"
+    },
+    "pixel/body": {
+      "font": "Galmuri11 Regular",
+      "size": 14,
+      "weight": 400,
+      "lineHeight": "20px",
+      "letterSpacing": "0"
+    }
+  },
+  "spacing": {
+    "space/2": 8,
+    "space/3-5": 14,
+    "space/4": 16,
+    "space/10": 40
+  },
+  "radius": {
+    "radius/lg": 8
+  },
+  "effectStyles": "N/A — 그림자 0개 (실측)",
+  "stages": {
+    "foundation": {
+      "status": "PASS",
+      "checks": "34/34",
+      "report": "docs/tome-intro-audit.json"
+    },
+    "component": {
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    "screen": {
+      "status": "PASS",
+      "checks": "2/2",
+      "note": "부품 조립본과 원본 IntroScreen 픽셀 차이 0"
+    },
+    "variation": {
+      "status": "DONE — 사용자 선택 대기",
+      "variants": {
+        "A": "봉투 한 장",
+        "B": "사용법 한 줄",
+        "C": "주소 라벨"
+      },
+      "checks": "21/21 (+목록·오류 3)"
+    }
+  },
+  "resumeFrom": "사용자가 A/B/C 선택 → 7가지 기준 2개로 다듬기 → before/after",
+  "storybookList": "TO ME만 표시 (.storybook/main.js stories 범위 축소 — AfterToday·설치 예제 파일은 보존)",
+  "components": {
+    "BrandTitle": {
+      "file": "src/storybook/tome/parts.jsx",
+      "props": [
+        "title",
+        "tagline",
+        "showTagline"
+      ]
+    },
+    "PixelButton": {
+      "props": [
+        "label",
+        "onClick"
+      ],
+      "size": "343x48"
+    },
+    "PixelEnvelope": {
+      "asset": "public/assets/pixelart/envelope-closed.png 96x112",
+      "props": [
+        "scale (정수배)"
+      ]
+    }
+  },
+  "variationExtensions": "tomeIntroTokens.js VARIATION_EXTENSIONS — 기존 토큰 재사용, 신규 값 없음"
+}

@@ -1,0 +1,34 @@
+{
+  "stage": "1. Foundation — TO ME 인트로",
+  "date": "2026-10-07",
+  "verdict": "PASS",
+  "summary": { "checked": 34, "passed": 34, "failed": 0, "unknown": 0, "blocked": 0, "exceptionsOrNA": 5 },
+  "method": "Storybook에서 실제 IntroScreen을 375x667로 렌더 → getComputedStyle + CDP 실제 사용 글꼴 측정 → 토큰 정의(tomeIntroTokens.js)·코드 CSS 변수·측정값 3자 대조 (scratchpad/verify-intro.mjs). 항목별 결과: docs/tome-intro-audit-checks.json",
+  "evidence": ["docs/tome-evidence/intro-375x667.png", "docs/tome-evidence/tome-foundation.png", "docs/tome-evidence/intro-measure.json"],
+  "byGroup": {
+    "primitive": "3/3 — 정의값 = 코드 CSS 변수값",
+    "semantic": "5/5 — alias 대상 존재(끊긴 참조 0) + 실제 렌더 색 = alias 원시값",
+    "text": "15/15 — 크기·굵기·행간·자간·글꼴 (제목 1, 부제·버튼 2)",
+    "font": "3/3 — 실제 렌더 글꼴 Galmuri11-Regular, 대체 글꼴로 그려진 글자 0 (한글·영문 모두)",
+    "spacing": "4/4", "radius": "1/1",
+    "lineHeightRule": "2/2 — text-4xl 2.5/2.25×36=40px, text-sm 1.25/0.875×14=20px 정수 → px 유지",
+    "effect": "1/1 — 그림자 0개 확인"
+  },
+  "extensions": [
+    { "item": "Galmuri11 웹폰트", "conflict": "design.md 1.2 '시스템 폰트만, 웹폰트 없음'", "evidence": "index.css @font-face + font-pixel 유틸 (6ceac3e, design.md 1장보다 최신), 코칭 '픽셀 방향 유지'" },
+    { "item": "space/3-5 (14px), space/10 (40px)", "conflict": "design.md gap 스케일 4/8/12/16/24에 없음", "evidence": "IntroScreen.jsx py-3.5, mt-10 실측" },
+    { "item": "bg/action-primary, text/on-action", "conflict": "design.md에 버튼 색 정의 없음", "evidence": "IntroScreen.jsx bg-ink / text-white. 제목 글자와 같은 원시값이지만 역할이 달라 별도 의미 토큰" }
+  ],
+  "exceptionsAndNA": [
+    { "item": "Effect Style", "status": "N/A", "reason": "그림자 0개 실측" },
+    { "item": "굵기 600/700", "status": "N/A", "reason": "갈무리11 Regular 한 벌만 로드, 화면 전체 400" },
+    { "item": "style imageRendering: pixelated (h1)", "status": "N/A", "reason": "이미지용 속성이라 텍스트 렌더에 영향 없음 — 토큰 대상 아님" },
+    { "item": "max-w-440", "status": "N/A", "reason": "375 폭에서 적용 안 됨" },
+    { "item": "active:scale-[.98] 눌림 효과", "status": "Component 단계로 이월", "reason": "인터랙션 속성, Foundation 토큰 대상 아님" }
+  ],
+  "notes": [
+    "Storybook 폰 틀이 border 1px로 안쪽 폭을 373으로 줄이던 문제 발견 → outline으로 바꿔 375 확보 후 재측정 (ToMe.stories.jsx)",
+    "Storybook 실행 중 새 스토리 파일의 Tailwind 클래스가 생성되지 않는 현상 → 재시작으로 해결, 재검사 34/34"
+  ],
+  "resumeFrom": "2단계(Component) 프롬프트 대기"
+}

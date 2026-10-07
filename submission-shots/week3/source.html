@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>TO ME — 3주차 과제</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; color: #15120d; font-size: 10.5pt; line-height: 1.65; margin: 0; word-break: keep-all; }
+  h1 { font-size: 22pt; margin: 0 0 4px; letter-spacing: -0.5px; }
+  h2 { font-size: 14pt; margin: 0 0 10px; padding-top: 4px; }
+  h3 { font-size: 11.5pt; margin: 14px 0 4px; }
+  p { margin: 0 0 8px; }
+  .sub { color: #6e6656; font-size: 11pt; margin-bottom: 18px; }
+  .box { background: #f6f4ef; border-radius: 8px; padding: 12px 16px; margin: 10px 0 14px; }
+  .box p:last-child { margin: 0; }
+  .label { display: inline-block; font-size: 9pt; font-weight: 700; color: #6e6656; margin-bottom: 2px; }
+  section { margin-bottom: 22px; }
+  .page { page-break-before: always; }
+  img { width: 100%; border: 1px solid #e7e2d5; border-radius: 6px; margin: 6px 0 4px; }
+  .cap { font-size: 9pt; color: #a79f8c; margin-bottom: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 9.8pt; margin: 8px 0 12px; }
+  th, td { border-bottom: 1px solid #e7e2d5; padding: 7px 6px; text-align: left; vertical-align: top; }
+  th { color: #6e6656; font-weight: 700; font-size: 9pt; }
+  tr.pick td { background: #f6f4ef; font-weight: 600; }
+  .flow { display: flex; gap: 6px; align-items: center; margin: 8px 0 12px; font-size: 9.8pt; }
+  .flow span.step { background: #f6f4ef; border-radius: 6px; padding: 6px 10px; }
+  .flow span.arrow { color: #a79f8c; }
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }
+  .ba div { border: 1px solid #e7e2d5; border-radius: 8px; padding: 10px 12px; }
+  .ba .t { display: block; font-weight: 700; margin-bottom: 2px; }
+  .keep { break-inside: avoid; page-break-inside: avoid; }
+  .small { font-size: 9pt; color: #6e6656; }
+</style>
+</head>
+<body>
+
+<h1>TO ME — 첫 화면 다듬기</h1>
+<div class="sub">ASC 디자인트랙 3주차 과제 · 화면 하나를 여러 시안으로 비교하고, 고른 안을 기준에 맞춰 다듬기</div>
+
+<section>
+  <h2>TO ME는 어떤 앱인가요?</h2>
+  <p><b>오늘 할 일을 "나에게 보내는 편지"로 쓰는 일정 앱</b>입니다.</p>
+  <div class="flow">
+    <span class="step">할 일을 편지로 쓰기</span><span class="arrow">→</span>
+    <span class="step">보내기</span><span class="arrow">→</span>
+    <span class="step">약속한 시간에 도착</span><span class="arrow">→</span>
+    <span class="step">그때 안 하면 "반송"</span>
+  </div>
+  <p>할 일을 미루면 편지가 반송함에 쌓이고, 나중에라도 해내면 "재배송 성공"이 됩니다. 계획은 세우지만 막상 그 시간이 되면 자꾸 미루는 사람을 위한 앱입니다.</p>
+</section>
+
+<section>
+  <h2>이번에 다룬 화면: 첫 화면</h2>
+  <p>앱을 열면 가장 먼저 보이는 화면입니다. 앱 이름 <b>"TO ME"</b>, 한 줄 소개 <b>"나를 완성하는 시간"</b>, 그리고 <b>Start 버튼</b>만 있습니다.</p>
+  <div class="box">
+    <span class="label">왜 이 화면을 골랐나</span>
+    <p>처음 보는 사람이 이 화면만 보고는 <b>"편지 앱"이라는 걸 알 수 없었습니다.</b> 서비스의 첫인상이 가장 중요한 화면인데, 핵심 아이디어(편지)가 하나도 드러나지 않았습니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2>어떻게 진행했나</h2>
+  <div class="flow">
+    <span class="step">① 시안 3개 만들기</span><span class="arrow">→</span>
+    <span class="step">② 하나 고르기</span><span class="arrow">→</span>
+    <span class="step">③ 기준 2가지로 다듬기</span>
+  </div>
+  <p>시안은 모두 <b>실제 앱 코드로</b> 만들어서, 그림으로 그린 시안이 아니라 실제로 동작하는 화면 그대로 비교했습니다. 강사님 피드백("픽셀 그래픽 방향은 유지", "'나를 완성' 문구는 브랜드 메시지로만")을 전제로 깔고 작업했습니다.</p>
+</section>
+
+<section class="page">
+  <h2>① 시안 3개</h2>
+  <img src="02-variations.png" alt="">
+  <div class="cap">왼쪽부터 지금 화면, 시안 A · B · C</div>
+  <table>
+    <tr><th style="width:22%">시안</th><th style="width:30%">무엇을 바꿨나</th><th>좋은 점</th><th>아쉬운 점</th></tr>
+    <tr class="pick"><td>A · 봉투 한 장 ✓</td><td>제목 위에 닫힌 편지 봉투 그림 하나</td><td>그림 한 장으로 "편지 앱"이라는 게 바로 보임</td><td>사용법까지는 안 알려줌</td></tr>
+    <tr><td>B · 사용법 한 줄</td><td>제목 아래 "쓰기 → 보내기 → 도착 → 반송"</td><td>앱 쓰는 흐름을 한눈에 이해</td><td>글자가 많아져 첫 화면이 복잡해짐</td></tr>
+    <tr><td>C · 주소 라벨</td><td>화면을 편지 봉투 겉면처럼 (FROM. 오늘의 나 / TO. ME)</td><td>편지 컨셉이 가장 강하게 드러남</td><td>앱 이름 "TO ME"가 둘로 쪼개져 로고 느낌이 약해짐</td></tr>
+  </table>
+  <h2 style="margin-top:18px">② A를 고른 이유</h2>
+  <p>가장 단순하면서도 <b>"편지"라는 핵심 아이디어를 첫 화면에서 전달</b>합니다. 사용법 설명은 바로 다음 화면(앱 소개 화면)이 맡고 있어서, 첫 화면은 담백하게 두는 게 맞다고 판단했습니다.</p>
+</section>
+
+<section class="page">
+  <h2>③ 다듬기 — 간격, 강조</h2>
+  <img src="01-before-after.png" alt="">
+  <div class="cap">왼쪽 Before(원래 화면) · 오른쪽 After(완성)</div>
+
+  <div class="keep">
+  <h3>다듬기 1 · 간격 — 봉투와 제목을 한 묶음으로</h3>
+  <div class="ba">
+    <div><span class="t">문제</span>봉투 그림 파일 아래쪽에 눈에 안 보이는 빈 공간이 있어서, 봉투와 제목 사이가 생각보다 두 배 넘게 벌어져 보였습니다(53px). 봉투가 제목과 따로 둥둥 떠 보였습니다.</div>
+    <div><span class="t">개선</span>눈에 보이는 간격을 24px로 좁혔습니다. 이제 <b>"봉투 + 앱 이름"이 한 묶음</b>, 그 아래 Start 버튼이 따로 한 묶음으로 깔끔하게 나뉘어 보입니다.</div>
+  </div>
+  </div>
+
+  <div class="keep">
+  <h3>다듬기 2 · 강조 — 키우지 않고 눈에 띄게</h3>
+  <div class="ba">
+    <div><span class="t">시험</span>봉투를 2배로 키워 봤습니다. 봉투가 앱 이름만큼 커져서 둘이 서로 주인공 자리를 다퉜습니다. → 제외</div>
+    <div><span class="t">결정</span>봉투는 작게 그대로 둡니다. 화면에서 <b>색이 있는 건 빨간 봉랍 하나뿐</b>이라 작아도 시선이 먼저 가고, 크기로는 "TO ME"가 계속 주인공입니다.</div>
+  </div>
+  </div>
+  <img src="03-emphasis-test.png" alt="" style="width:78%">
+  <div class="cap">강조 시험 — 왼쪽 원래 크기(채택) · 오른쪽 2배(제외)</div>
+</section>
+
+<section>
+  <h2>정리</h2>
+  <p>더 많이 바꾼 시안(B, C)도 만들어 비교한 뒤, <b>일부러 가장 절제된 안을 골랐습니다.</b> 그리고 "더 크게"가 아니라 "빈 공간과 단 하나의 색"으로 봉투를 눈에 띄게 만들었습니다. 그 결과 첫 화면에서 앱 이름과 함께 "편지 앱"이라는 정체성이 바로 전달됩니다.</p>
+  <p class="small">작업 메모: 원래 Figma로 진행하려 했으나 무료 플랜의 사용 횟수 한도에 걸려, 강의에서 소개된 Storybook(앱 화면을 부품별로 모아 보여주는 도구)으로 같은 과정을 진행했습니다.</p>
+</section>
+
+</body>
+</html>

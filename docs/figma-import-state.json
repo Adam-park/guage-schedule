@@ -1,0 +1,351 @@
+{
+  "updatedAt": "2026-10-07",
+  "figma": {
+    "fileKey": "Jtp9WS8uEXiQK0j9tBTSyr",
+    "fileName": "Day Battery — AfterToday (ASC 3주차)",
+    "url": "https://www.figma.com/design/Jtp9WS8uEXiQK0j9tBTSyr",
+    "plan": "team::1288838637724352919 (SANG HEE PARK's team, drafts)"
+  },
+  "source": {
+    "repo": "Guage-schedule",
+    "commit": "5a15e35",
+    "screen": "src/screens/AfterToday.jsx",
+    "route": "/?screen=after-today",
+    "dependencies": [
+      "src/components/ParcelCard.jsx",
+      "src/components/ReturnBin.jsx",
+      "src/data/mockParcels.js",
+      "src/lib/parcelState.js",
+      "src/index.css (@theme)"
+    ],
+    "state": "목데이터 기본 상태 1개 — due 1(팀 회의 자료 공유) / scheduled 1(치과 예약) / returned 1(어제 미룬 보고서 초안) / done 1(아침 스트레칭, details 접힘)",
+    "excludedLegacy": "App.jsx/DayCell/Hearth/ScheduleCard/ScheduleHand/Pyre(불꽃 모델), BeforeRunner(러너 컨셉), ember/pit/rain/buff 색 — 이 화면에서 안 씀"
+  },
+  "platform": {
+    "type": "mobile web",
+    "viewportWidth": 375,
+    "orientation": "portrait",
+    "containerMaxWidth": 440,
+    "note": "375에서는 max-w 440이 적용 안 됨 → 콘텐츠 폭 343 (좌우 16)"
+  },
+  "criteria": {
+    "designMd": "design.md 1장(토큰) — 2~3장(불꽃)·6장(러너)은 과거 시안이라 제외",
+    "conceptMd": "CONCEPT.md(정보 우선순위·상태색 톤)",
+    "implementation": "src/index.css @theme + 실제 렌더 측정값(docs/figma-evidence/*.png, Chromium 375px)"
+  },
+  "variables": {
+    "Primitives": {
+      "collectionId": "VariableCollectionId:2:2",
+      "modes": {
+        "Value": "2:0"
+      },
+      "vars": {
+        "color/white": {
+          "id": "VariableID:2:3",
+          "value": "#FFFFFF"
+        },
+        "color/sand/100": {
+          "id": "VariableID:2:4",
+          "value": "#F6F4EF"
+        },
+        "color/sand/200": {
+          "id": "VariableID:2:5",
+          "value": "#E7E2D5"
+        },
+        "color/ink/900": {
+          "id": "VariableID:2:6",
+          "value": "#15120D"
+        },
+        "color/ink/600": {
+          "id": "VariableID:2:7",
+          "value": "#6E6656"
+        },
+        "color/ink/400": {
+          "id": "VariableID:2:8",
+          "value": "#A79F8C"
+        },
+        "color/blue/600": {
+          "id": "VariableID:2:9",
+          "value": "#2563EB"
+        },
+        "color/amber/700": {
+          "id": "VariableID:2:10",
+          "value": "#B45309"
+        },
+        "color/green/700": {
+          "id": "VariableID:2:11",
+          "value": "#15803D"
+        }
+      }
+    },
+    "Semantic": {
+      "collectionId": "VariableCollectionId:2:12",
+      "modes": {
+        "Light": "2:1"
+      },
+      "vars": {
+        "bg/page": {
+          "id": "VariableID:2:13",
+          "alias": "color/white",
+          "code": "--color-bg"
+        },
+        "bg/surface": {
+          "id": "VariableID:2:14",
+          "alias": "color/white",
+          "code": "--color-surface"
+        },
+        "bg/sunken": {
+          "id": "VariableID:2:15",
+          "alias": "color/sand/100",
+          "code": "--color-surface-sunken"
+        },
+        "border/default": {
+          "id": "VariableID:2:16",
+          "alias": "color/sand/200",
+          "code": "--color-border"
+        },
+        "text/primary": {
+          "id": "VariableID:2:17",
+          "alias": "color/ink/900",
+          "code": "--color-ink"
+        },
+        "text/secondary": {
+          "id": "VariableID:2:18",
+          "alias": "color/ink/600",
+          "code": "--color-ink-dim"
+        },
+        "text/tertiary": {
+          "id": "VariableID:2:19",
+          "alias": "color/ink/400",
+          "code": "--color-ink-faint"
+        },
+        "text/state/due": {
+          "id": "VariableID:2:20",
+          "alias": "color/blue/600",
+          "code": "--color-state-due"
+        },
+        "text/state/returned": {
+          "id": "VariableID:2:21",
+          "alias": "color/amber/700",
+          "code": "--color-state-returned"
+        },
+        "text/state/delivered": {
+          "id": "VariableID:2:22",
+          "alias": "color/green/700",
+          "code": "--color-state-delivered"
+        },
+        "icon/tertiary": {
+          "id": "VariableID:10:2",
+          "alias": "color/ink/400",
+          "scopes": [
+            "SHAPE_FILL"
+          ],
+          "code": "currentColor (text-ink-faint) — summary 마커",
+          "addedInStage": 2
+        }
+      }
+    },
+    "Dimensions": {
+      "collectionId": "VariableCollectionId:2:23",
+      "modes": {
+        "Value": "2:2"
+      },
+      "vars": {
+        "space/1": {
+          "id": "VariableID:2:24",
+          "value": 4,
+          "code": "mt-1"
+        },
+        "space/2": {
+          "id": "VariableID:2:26",
+          "value": 8,
+          "code": "gap-2, mt-2, mb-2, py-2"
+        },
+        "space/3": {
+          "id": "VariableID:2:27",
+          "value": 12,
+          "code": "py-3, px-3"
+        },
+        "space/4": {
+          "id": "VariableID:2:28",
+          "value": 16,
+          "code": "px-4, gap-4"
+        },
+        "space/10": {
+          "id": "VariableID:2:29",
+          "value": 40,
+          "code": "py-10",
+          "extension": true
+        },
+        "radius/md": {
+          "id": "VariableID:2:30",
+          "value": 6,
+          "code": "rounded-md",
+          "extension": true
+        },
+        "radius/lg": {
+          "id": "VariableID:2:31",
+          "value": 8,
+          "code": "rounded-lg"
+        },
+        "border-width/default": {
+          "id": "VariableID:2:32",
+          "value": 1,
+          "code": "border"
+        },
+        "opacity/scheduled": {
+          "id": "VariableID:2:33",
+          "value": 60,
+          "unit": "Figma 0–100 (노드 적용 시 0.6 확인)",
+          "code": "opacity-60"
+        }
+      }
+    }
+  },
+  "textStyles": {
+    "caption/regular": {
+      "id": "S:3403f77e8ac019f43520bcc20891c93338958172,",
+      "font": "Noto Sans KR 400",
+      "size": 12,
+      "lineHeight": "16px",
+      "tabular": false,
+      "usedBy": "오늘 처리한 것 summary, 완료 행 제목"
+    },
+    "caption/strong": {
+      "id": "S:82f863d154214a2561258da7d98519e13ed73f8a,",
+      "font": "Noto Sans KR wght 600",
+      "size": 12,
+      "lineHeight": "16px",
+      "tabular": false,
+      "usedBy": "'오늘' 헤더, 상태 라벨, 버튼, 반송함 헤더, 완료 도장"
+    },
+    "title/card": {
+      "id": "S:ad2a4b4b37a13e12f8ac8c73184d764674b64b1e,",
+      "font": "Noto Sans KR wght 600",
+      "size": 14,
+      "lineHeight": "20px",
+      "tabular": false,
+      "usedBy": "카드 제목"
+    },
+    "caption/numeric": {
+      "id": "S:a3448fe71b04bc4920cadc7834d6f30e1457a178,",
+      "font": "Noto Sans KR 400",
+      "size": 12,
+      "lineHeight": "16px",
+      "tabular": "글꼴 기본 숫자가 고정폭 (측정: 0~9 폭 동일) — 별도 설정 불필요",
+      "usedBy": "ParcelCard 시간",
+      "extension": "tabular-nums가 시간/개수에만 있어 분리 (ParcelCard.jsx, ReturnBin.jsx)"
+    },
+    "caption/numeric-strong": {
+      "id": "S:34b342315508e013d7f17107828ee5673c6db436,",
+      "font": "Noto Sans KR wght 600",
+      "size": 12,
+      "lineHeight": "16px",
+      "tabular": "글꼴 기본 숫자가 고정폭 (측정: 0~9 폭 동일) — 별도 설정 불필요",
+      "usedBy": "반송함 개수"
+    }
+  },
+  "effectStyles": {},
+  "components": {
+    "Icon/Disclosure": {
+      "id": "10:3",
+      "vector": "10:4",
+      "fill": "icon/tertiary",
+      "size": "12.703x16, 삼각형 6.75x8 @ y5 (실측)"
+    },
+    "ActionButton": {
+      "id": "11:2",
+      "label": "11:3",
+      "props": {
+        "label#11:0": "TEXT"
+      },
+      "height": 34
+    },
+    "ParcelCard": {
+      "setId": "11:25",
+      "props": {
+        "title#11:1": "TEXT",
+        "time#11:5": "TEXT"
+      },
+      "variants": {
+        "phase=due": {
+          "id": "11:4",
+          "h": 108,
+          "button": "11:10"
+        },
+        "phase=scheduled": {
+          "id": "11:12",
+          "h": 66
+        },
+        "phase=returned": {
+          "id": "11:17",
+          "h": 108,
+          "button": "11:23"
+        }
+      }
+    },
+    "ReturnBin": {
+      "status": "미생성 — Figma MCP 호출 한도 도달로 실행 안 됨(스크립트 실패는 원자적이라 잔여물 없음)"
+    },
+    "DoneSummary": {
+      "status": "미생성"
+    }
+  },
+  "stages": {
+    "foundation": {
+      "status": "PASS",
+      "done": [
+        "Primitives 9",
+        "Semantic 10",
+        "Dimensions 10",
+        "Text Styles 5",
+        "Effect Styles 0 (N/A)"
+      ],
+      "completedAt": "2026-10-07",
+      "resumeFrom": "2단계(Component) 프롬프트 대기"
+    },
+    "component": {
+      "status": "BLOCKED",
+      "reason": "Figma MCP Starter 플랜 한도(월 20회) 도달",
+      "done": [
+        "Foundation 재확인",
+        "icon/tertiary 추가",
+        "space/1-5 삭제",
+        "Icon/Disclosure",
+        "ActionButton",
+        "ParcelCard x3"
+      ],
+      "resumeFrom": "ReturnBin 생성 → DoneSummary → 전체 검사"
+    },
+    "screen": {
+      "status": "NOT_STARTED"
+    }
+  },
+  "fontDecision": {
+    "chosen": "Noto Sans KR",
+    "approvedBy": "사용자 2026-10-07 (B안)",
+    "reason": "Malgun Gothic/Segoe UI/Apple SD Gothic Neo 모두 Figma(웹) 사용 불가 — 2회 확인",
+    "weight600": "가변 글꼴 wght 600 축으로 정확히 지정 (Bold 700 대체 불필요)"
+  },
+  "foundationChanges": [
+    {
+      "date": "2026-10-07",
+      "stage": 2,
+      "change": "space/1-5(VariableID:2:25) 삭제",
+      "reason": "선택 상태(완료 목록 접힘)에서 사용처 없음 — 완료 행 gap-1.5/py-1.5는 펼쳐야 보임"
+    },
+    {
+      "date": "2026-10-07",
+      "stage": 2,
+      "change": "icon/tertiary 추가",
+      "reason": "summary disclosure 마커 Vector 색 — 아이콘 용도 Semantic"
+    }
+  ],
+  "platformDecision": {
+    "display": "모바일 웹, 콘텐츠만 (브라우저 UI·기기 프레임 없음)",
+    "width": 375,
+    "statusBar": "N/A — 콘텐츠만 표현 (공통 정보 확정)",
+    "homeIndicator": "N/A — 동일",
+    "safeArea": "N/A — AfterToday/ParcelCard/ReturnBin에 env(safe-area-*) 사용 없음 (grep 확인)"
+  }
+}

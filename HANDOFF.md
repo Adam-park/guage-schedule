@@ -1,11 +1,35 @@
 # 이어서 작업하기 (데스크탑 ↔ 노트북 핸드오프)
 
 > 이 파일 = "다른 컴퓨터에서 이 프로젝트 이어받는 법". 설계·규칙은 [`CLAUDE.md`](./CLAUDE.md) 참조.
-> 마지막 작업일: 2026-10-07 (ASC 디자인트랙 3주차 과제 진행 중 — Figma 베리에이션 작업, 아래 최신 항목 참조)
+> 마지막 작업일: 2026-10-08 (TO ME 화면을 Storybook으로 하나씩 확정 중 — 아래 최신 항목 참조)
 
 ---
 
 ## 0. 세션 기록
+
+### 2026-10-07~08 (세션) — Storybook 도입, 3주차 과제 제출본, TO ME 화면 4개 확정 (다음 세션은 여기서부터)
+
+**도구 전환**: Figma MCP가 Starter 플랜 한도(월 20회)에 걸려 **Storybook(10.6)** 으로 전환(강의 PDF 50~51p). `npm run storybook` → `http://localhost:6006`. 왼쪽 목록 = **1 확정 화면**(흐름 순) / **2 작업 기록**(시안·다듬기 과정). Figma 파일(`Jtp9WS8uEXiQK0j9tBTSyr`)에는 AfterToday 기준 변수·부품 일부만 있음 — 대상 화면이 TO ME로 바뀌어 사실상 미사용.
+
+**세계관 확정** → [CONCEPT.md](./CONCEPT.md) '세계관'. 하루의 시간대마다 내가 있고(이걸 아는 건 현재의 나뿐), 현재의 나가 미래의 나를 위해 **오늘 할 일과 시간을 편지에 적고**, 해내면 편지가 미래의 나에게 도착한다. 착안: *CONTROL Resonant* 지하도 구역 상황 설정(구조만). "나를 완성" 대신 제품 안에선 "더 나은 나".
+
+**확정 화면** (`1 확정 화면`)
+1. **인트로** — 닫힌 봉투(빨간 씰, 1배) + TO ME + Start. **앱 반영됨**(`src/screens/IntroScreen.jsx`)
+2. **온보딩** — 봉투 고정 + 7칸 둥근 픽셀 게이지(진행 파랑 → 다 차면 green-300) + 마지막 반짝임 별 + 세계관 문장 7개(14px, 두 줄). **앱 반영됨**(`OnboardingScreen.jsx`). 공용 부품 `src/components/tome/`(PixelEnvelope·PixelGauge·EnvelopeSparkle). 흐름: 인트로 Start → 온보딩 → 첫 편지 쓰기 → 편지 작성(`main.jsx`)
+3. **편지 작성** — 닫힘 → 열린 봉투(`envelope-open.png`, PixelLab, 씰 없음) → 할 일 입력 4글자당 속지 글씨 한 줄 써짐, 시간 입력 시 마지막 줄. "오늘 할 일 1/3" / "할 시간" / 검은 "보내기". 보내면 다시 닫힌 봉투 + 왼쪽 뒤 **꼬리선** 효과 → 다음 편지(2/3). 3통 다 보내면 안내 문구. 왼쪽 위 "← 나가기". **Storybook에만**(`src/storybook/tome/letter.jsx` LetterFinal)
+4. **배송 상태 목록** — 작은 봉투 + 할 일 + 도착시각 + 게이지(보낸 시각→도착 시각 진행률) + 남은 시간, 3줄. **Storybook에만**(`status.jsx` StatusList)
+5. **편지 상세** — 목록에서 누름. 봉투 크기·위치 = 편지 작성 화면(288×336, x44 y24). "편지1" + 할 일 + 게이지(마지막 찬 칸 깜빡임, 측정상 부담 거의 0) + 남은 시간. **Storybook에만**(StatusDetail)
+
+**3주차 과제 제출본**: `submission-shots/week3/TO-ME-3주차-과제.pdf` (인트로 Before/After, 간격·강조). 원본 `source.html`.
+
+**규칙(이번 세션에서 생김)**: 그림은 Claude가 코드로 그리지 말 것 → PixelLab 사용(메모리 no-claude-drawn-images). 외부 앱 메뉴 위치 추측 안내 금지(메모리 no-guessed-ui-directions). Storybook은 새 파일 추가 후 스타일이 안 먹으면 서버 재시작 필요.
+
+**미결 / 다음에 할 것**
+- 편지 작성·배송 상태·상세 화면 **앱 반영**(지금 앱의 LetterWriteScreen은 옛 v3 편지지 그대로)
+- 도착 시각이 되면 목록·상세가 어떻게 바뀌는지(배송 시도 중 / 해냈어요 버튼), 반송 편지 보여주는 곳, "나가기" 이동 화면, 쓰다가 나갈 때 처리
+- 반송함 '다시 보내기'가 하루 3통에 포함되는지
+- 온보딩 문장의 "해낼"·"배송"을 편지 작성 화면 표현(할 일/할 시간/보내기)과 맞출지
+- 정리 대기(커밋 안 함): `src/stories/`(Storybook 설치 예제), `public/assets/pixelart/envelope-open-v1~v4·v3-noseal-a/b.png`(채택 안 된 후보) — 삭제 여부 확인 필요
 
 ### 2026-10-07 (세션) — "반송함(TO ME)" 컨셉 화면 완성 + ASC 3주차 Figma 과제 착수 (진행 중, 다음 세션에서 이어갈 것)
 

@@ -1,0 +1,246 @@
+{
+ "total": 34,
+ "passed": 34,
+ "failed": 0,
+ "pageErrors": [],
+ "checks": [
+  {
+   "group": "primitive",
+   "item": "color/white",
+   "expected": "#ffffff",
+   "actual": "#ffffff",
+   "pass": true
+  },
+  {
+   "group": "primitive",
+   "item": "color/ink/900",
+   "expected": "#15120d",
+   "actual": "#15120d",
+   "pass": true
+  },
+  {
+   "group": "primitive",
+   "item": "color/ink/600",
+   "expected": "#6e6656",
+   "actual": "#6e6656",
+   "pass": true
+  },
+  {
+   "group": "semantic",
+   "item": "bg/page → color/white",
+   "expected": "#ffffff",
+   "actual": "#ffffff",
+   "pass": true
+  },
+  {
+   "group": "semantic",
+   "item": "text/primary → color/ink/900",
+   "expected": "#15120d",
+   "actual": "#15120d",
+   "pass": true
+  },
+  {
+   "group": "semantic",
+   "item": "text/secondary → color/ink/600",
+   "expected": "#6e6656",
+   "actual": "#6e6656",
+   "pass": true
+  },
+  {
+   "group": "semantic",
+   "item": "bg/action-primary → color/ink/900",
+   "expected": "#15120d",
+   "actual": "#15120d",
+   "pass": true
+  },
+  {
+   "group": "semantic",
+   "item": "text/on-action → color/white",
+   "expected": "#ffffff",
+   "actual": "#ffffff",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/display size (H1)",
+   "expected": "36px",
+   "actual": "36px",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/display weight (H1)",
+   "expected": "400",
+   "actual": "400",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/display lineHeight (H1)",
+   "expected": "40px",
+   "actual": "40px",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/display letterSpacing (H1)",
+   "expected": "5.4px",
+   "actual": "5.4px",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/display family (H1)",
+   "expected": "Galmuri11",
+   "actual": "Galmuri11",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body size (P)",
+   "expected": "14px",
+   "actual": "14px",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body weight (P)",
+   "expected": "400",
+   "actual": "400",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body lineHeight (P)",
+   "expected": "20px",
+   "actual": "20px",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body letterSpacing (P)",
+   "expected": "normal",
+   "actual": "normal",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body family (P)",
+   "expected": "Galmuri11",
+   "actual": "Galmuri11",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body size (BUTTON)",
+   "expected": "14px",
+   "actual": "14px",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body weight (BUTTON)",
+   "expected": "400",
+   "actual": "400",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body lineHeight (BUTTON)",
+   "expected": "20px",
+   "actual": "20px",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body letterSpacing (BUTTON)",
+   "expected": "normal",
+   "actual": "normal",
+   "pass": true
+  },
+  {
+   "group": "text",
+   "item": "pixel/body family (BUTTON)",
+   "expected": "Galmuri11",
+   "actual": "Galmuri11",
+   "pass": true
+  },
+  {
+   "group": "font",
+   "item": "실제 렌더 글꼴 #storybook-root h1",
+   "expected": "Galmuri11-Regular",
+   "actual": "Galmuri11-Regular",
+   "pass": true
+  },
+  {
+   "group": "font",
+   "item": "실제 렌더 글꼴 #storybook-root p",
+   "expected": "Galmuri11-Regular",
+   "actual": "Galmuri11-Regular",
+   "pass": true
+  },
+  {
+   "group": "font",
+   "item": "실제 렌더 글꼴 #storybook-root button",
+   "expected": "Galmuri11-Regular",
+   "actual": "Galmuri11-Regular",
+   "pass": true
+  },
+  {
+   "group": "spacing",
+   "item": "space/2 제목↔부제 (p margin-top)",
+   "expected": "8px",
+   "actual": "8px",
+   "pass": true
+  },
+  {
+   "group": "spacing",
+   "item": "space/3-5 버튼 padding-top/bottom",
+   "expected": "14px",
+   "actual": "14px",
+   "pass": true
+  },
+  {
+   "group": "spacing",
+   "item": "space/4 화면 좌우 padding",
+   "expected": "16px",
+   "actual": "16px",
+   "pass": true
+  },
+  {
+   "group": "spacing",
+   "item": "space/10 부제↔버튼 (button margin-top)",
+   "expected": "40px",
+   "actual": "40px",
+   "pass": true
+  },
+  {
+   "group": "radius",
+   "item": "radius/lg 버튼",
+   "expected": "8px",
+   "actual": "8px",
+   "pass": true
+  },
+  {
+   "group": "lineHeight-rule",
+   "item": "text-4xl calc(2.5/2.25)×36",
+   "expected": 40,
+   "actual": 40,
+   "pass": true
+  },
+  {
+   "group": "lineHeight-rule",
+   "item": "text-sm calc(1.25/0.875)×14",
+   "expected": 20,
+   "actual": 20,
+   "pass": true
+  },
+  {
+   "group": "effect",
+   "item": "그림자 있는 요소 수 (0이면 Effect Style N/A)",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  }
+ ]
+}

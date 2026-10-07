@@ -1,12 +1,9 @@
-// 첫 화면 — 닫힌 편지 봉투 + "TO ME" / "나를 완성하는 시간" + Start 버튼, 세로 중앙
-// 2026-10-07 디자인: 봉투 1배(작게 두고 유일한 색인 봉랍으로 시선), 봉투↔제목 보이는 간격 24px (submission-shots/week3)
-import PixelEnvelope from '../components/tome/PixelEnvelope.jsx'
-
+// 보관본: 2026-10-07 디자인 반영 전 IntroScreen (commit 5a15e35). Storybook Before 비교 전용 — 앱에서 쓰지 않음
+// 첫 화면 — 제목 "나를 완성하는 시간" + "TO ME", 중앙 상단 배치, 아래에 Start 버튼
 export default function IntroScreen({ onStart }) {
   return (
     <div className="mx-auto flex min-h-full max-w-[440px] flex-col items-center justify-center px-4">
-      <PixelEnvelope trimBottom />
-      <div className="mt-6 flex flex-col items-center text-center">
+      <div className="flex flex-col items-center text-center">
         <h1 className="font-pixel text-4xl tracking-[0.15em] text-ink" style={{ imageRendering: 'pixelated' }}>
           TO ME
         </h1>

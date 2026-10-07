@@ -1,0 +1,162 @@
+{
+  "stage": "1. Foundation",
+  "date": "2026-10-07",
+  "fileKey": "Jtp9WS8uEXiQK0j9tBTSyr",
+  "verdict": "PASS",
+  "summary": {
+    "checked": 38,
+    "passed": 38,
+    "failed": 0,
+    "unknown": 0,
+    "blocked": 0,
+    "exceptionsOrNA": 6
+  },
+  "method": "use_figma로 getLocalVariableCollectionsAsync/getVariableByIdAsync 재조회 — 이름·타입·값·scope·alias 대상과 해석값을 state 파일 기대값과 대조. 생성 스크립트 반환값이 아니라 별도 읽기 호출 결과 기준.",
+  "evidence": {
+    "liveScreen": [
+      "docs/figma-evidence/after-today-375-collapsed.png",
+      "docs/figma-evidence/after-today-375-open.png"
+    ],
+    "measurement": "Chromium 375px getComputedStyle + CDP CSS.getPlatformFontsForNode"
+  },
+  "checks": {
+    "variables": {
+      "result": "PASS 29/29",
+      "items": [
+        "Primitives 9: 값 일치, scopes [] (피커 비노출)",
+        "Semantic 10: alias 10/10 연결, 끊긴 alias 0, 해석값 = index.css @theme 값",
+        "Dimensions 10: 값 일치, scope 일치 (GAP/CORNER_RADIUS/STROKE_FLOAT/OPACITY)",
+        "opacity/scheduled: 60 저장 → 임시 노드 바인딩 시 opacity 0.6 확인 후 노드 삭제"
+      ]
+    },
+    "idMatch": {
+      "result": "PASS",
+      "detail": "state 파일 ID 29개 = 실제 Figma ID 29개, 중복 생성 0 (생성 전 컬렉션 존재 여부 검사)"
+    },
+    "textStyles": {
+      "result": "PASS 5/5",
+      "method": "스타일 재조회 + 임시 텍스트 노드에 스타일 적용해 렌더 높이·글꼴·연결 확인 후 노드 삭제",
+      "items": [
+        {
+          "style": "caption/regular",
+          "expected": "12 / 400 / 16px / 0",
+          "actual": "12 / Noto Sans KR wght400 / 16px / 0, 렌더 높이 16"
+        },
+        {
+          "style": "caption/strong",
+          "expected": "12 / 600 / 16px / 0",
+          "actual": "12 / wght600 / 16px / 0, 렌더 높이 16"
+        },
+        {
+          "style": "title/card",
+          "expected": "14 / 600 / 20px / 0",
+          "actual": "14 / wght600 / 20px / 0, 렌더 높이 20"
+        },
+        {
+          "style": "caption/numeric",
+          "expected": "12 / 400 / 16px / tabular",
+          "actual": "일치, 숫자폭 0~9 모두 6.7px"
+        },
+        {
+          "style": "caption/numeric-strong",
+          "expected": "12 / 600 / 16px / tabular",
+          "actual": "일치, 숫자폭 0~9 모두 7.0px"
+        }
+      ],
+      "lineHeightConversion": [
+        {
+          "role": "text-xs",
+          "source": "Tailwind v4 --text-xs--line-height: calc(1 / 0.75) = 1.3333 배율",
+          "calc": "12 × 1.3333 = 16.0",
+          "stored": "16px (정수 → px)",
+          "measured": "16px"
+        },
+        {
+          "role": "text-sm",
+          "source": "calc(1.25 / 0.875) = 1.4286 배율",
+          "calc": "14 × 1.4286 = 20.0",
+          "stored": "20px (정수 → px)",
+          "measured": "20px"
+        }
+      ]
+    },
+    "fonts": {
+      "result": "PASS (승인된 대체)",
+      "codeStack": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif",
+      "renderedOnWindows": "숫자·라틴 = Segoe UI / Segoe UI Semibold, 한글 = Malgun Gothic",
+      "figmaAvailable": "Malgun Gothic/Segoe UI/Apple SD Gothic Neo 없음 — 첫 확인 + 사용자가 웹에서 파일 연 상태로 재확인, 2회",
+      "decision": "Noto Sans KR (사용자 승인 B안). 가변 글꼴이라 weight 600을 wght 600 축으로 정확히 지정 — 굵기 대체 없음"
+    },
+    "tabularNums": {
+      "result": "PASS",
+      "where": "ParcelCard 시간 행, ReturnBin 개수 (font-variant-numeric: tabular-nums 실측 확인)",
+      "history": [
+        "1차: Plugin API로 스타일에 OpenType 기능 설정 불가 확인",
+        "2차: 사용자가 Figma UI 세부 정보 > 숫자 확인 — 고정폭 옵션 없음(위치만 있음)",
+        "3차: 숫자별 폭 측정 — Noto Sans KR 기본 숫자가 이미 고정폭이라 요구 충족"
+      ],
+      "evidence": "perDigitWidth: 400=6.7px×10종, 600=7.0px×10종"
+    }
+  },
+  "extensions": [
+    {
+      "token": "space/1-5 (6px)",
+      "conflict": "design.md 1.3 gap 스케일 4/8/12/16/24에 없음",
+      "evidence": "AfterToday.jsx 완료 목록 gap-1.5, 완료 행 py-1.5 (실측 6px)"
+    },
+    {
+      "token": "space/10 (40px)",
+      "conflict": "design.md 스케일에 없음",
+      "evidence": "AfterToday.jsx 페이지 py-10 (실측 40px)"
+    },
+    {
+      "token": "radius/md (6px)",
+      "conflict": "design.md 1.3 'radius 8px 고정'",
+      "evidence": "ParcelCard.jsx 버튼, AfterToday 완료 행 rounded-md (실측 6px). 해당 코드는 6ceac3e(10/1)로 design.md 1장(9/10~9/15)보다 최신"
+    },
+    {
+      "token": "text/state/* 3색",
+      "conflict": "design.md에 없음",
+      "evidence": "index.css @theme --color-state-* (주석: 'design.md 미반영'), CONCEPT.md Visual behavior '진행중/반송/완료 최소 색 구분'"
+    },
+    {
+      "token": "caption/numeric, caption/numeric-strong",
+      "conflict": "계획 3개 스타일에 없던 것",
+      "evidence": "tabular-nums가 ParcelCard 시간·ReturnBin 개수에만 있고 summary 개수엔 없음 → 같은 스타일로 묶으면 코드와 달라짐"
+    }
+  ],
+  "exceptionsAndNA": [
+    {
+      "item": "Effect Style",
+      "status": "N/A",
+      "reason": "화면 전 요소 box-shadow: none 실측 (31개 요소)"
+    },
+    {
+      "item": "container·텍스트 배경 rgba(0,0,0,0)",
+      "status": "fill 없음으로 표현",
+      "reason": "transparent 규칙"
+    },
+    {
+      "item": "본문 기본 16px/24px",
+      "status": "N/A",
+      "reason": "body 상속값, 이 화면에 해당 크기로 표시되는 텍스트 0개"
+    },
+    {
+      "item": "max-w 440",
+      "status": "N/A",
+      "reason": "375 기준 폭에서 적용되지 않음"
+    },
+    {
+      "item": "ReturnBin 점선 테두리 dash 패턴",
+      "status": "Component 단계로 이월",
+      "reason": "일회성 레이어 속성, 색·두께는 border/default·border-width/default 토큰으로 관리"
+    },
+    {
+      "item": "글꼴 대체 Malgun Gothic/Segoe UI → Noto Sans KR",
+      "status": "예외(사용자 승인)",
+      "reason": "코드 스택 글꼴이 Figma에서 사용 불가",
+      "evidence": "listAvailableFontsAsync 2회 조회 결과"
+    }
+  ],
+  "resumeFrom": "2단계(Component) 프롬프트 대기"
+}
