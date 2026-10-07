@@ -28,3 +28,7 @@ dist-ssr
 
 *storybook.log
 storybook-static
+
+# 과제 설명 문서 (비공개, 내 컴퓨터에만 — 저장소가 Public이라 올리면 공개됨)
+submission-shots/**/*.pdf
+submission-shots/**/source.html

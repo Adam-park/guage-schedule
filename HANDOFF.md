@@ -7,7 +7,26 @@
 
 ## 0. 세션 기록
 
-### 2026-10-07~08 (세션) — Storybook 도입, 3주차 과제 제출본, TO ME 화면 4개 확정 (다음 세션은 여기서부터)
+### ⏩ 다음 세션 시작하면 바로 할 일 (2026-10-08 새벽, 컨텍스트 한도로 세션 교체)
+
+**상태**: 커밋 `c139c87`까지 GitHub에 푸시 완료. 그 뒤 **제출본 PDF 수정분이 커밋·푸시 안 된 채** 남아 있음.
+
+**남은 마무리 (순서대로)**
+1. 사용자가 PDF 최종 확인 — `submission-shots/tome-flow-1008/TO-ME-하루흐름.pdf` (7쪽: 1쪽 설명 / 2~3쪽 비포·애프터 / 4~7쪽 하루 흐름 21장면). 원본 `source.html`, 21장면 이미지 `pdf/` 폴더
+2. [완료 10/8] 커밋 + 푸시 — 대상: `submission-shots/tome-flow-1008/`(pdf/ 21장·01~10 이미지), `HANDOFF.md`. **PDF·source.html은 비공개라 .gitignore로 제외(내 컴퓨터에만 있음)**. 커밋에서 뺄 것: `src/stories/`, `public/assets/pixelart/envelope-open-v1~v4·v3-noseal-a/b`, `mailbox-c1~c3`(사용자가 "그대로 두자"고 함 — 지우지도 커밋하지도 말 것)
+3. 푸시가 "Internal Server Error"로 거절되면 `git -c http.postBuffer=524288000 push origin main`로 재시도(10/8에 이걸로 성공)
+
+**제출본 규칙 (이번 세션에서 확정)**
+- 디스코드용 이미지 10장은 **01~10 숫자로 시작하는 파일명**(순서대로 올라가게): 같은 폴더 `01_인트로_비포애프터.png` ~ `10_하루마무리.png`. 비포는 **일부만**(인트로·온보딩·편지 작성 3개, 비포/애프터를 한 장에 나란히)
+- PDF는 이미지 제한이 없으니 **하루 흐름 전 장면** 포함
+- 설명 순서: **세계관을 왜 정했는지 → 세계관 → 화면이 어떻게 바뀌었는지 → 비포/애프터**
+- **말투**: 문장은 "-습니다", 목록·그림 설명은 짧은 명사형("~ 표시", "~라는 점"). 전부 "-요" ✗, "-다"(받았다) ✗, "~했나" 같은 반말 제목 ✗. 앱 문구 인용만 원문 그대로
+
+**Storybook**: `npm run storybook` → `http://localhost:6006`. 왼쪽 `1 확정 화면`에 하루 흐름 01~11 순서대로 있음. 새 파일 추가 후 스타일이 안 먹으면 서버 재시작.
+
+---
+
+### 2026-10-07~08 (세션) — Storybook 도입, 3주차 과제 제출본, TO ME 화면 4개 확정
 
 **도구 전환**: Figma MCP가 Starter 플랜 한도(월 20회)에 걸려 **Storybook(10.6)** 으로 전환(강의 PDF 50~51p). `npm run storybook` → `http://localhost:6006`. 왼쪽 목록 = **1 확정 화면**(흐름 순) / **2 작업 기록**(시안·다듬기 과정). Figma 파일(`Jtp9WS8uEXiQK0j9tBTSyr`)에는 AfterToday 기준 변수·부품 일부만 있음 — 대상 화면이 TO ME로 바뀌어 사실상 미사용.
 
@@ -191,7 +210,7 @@ npm run dev
 | 배터리 계산 | ✅ `src/lib/battery.js` 순수 함수 (잔량 %, 단계, 날짜별 배터리) |
 | 목데이터 | ✅ `src/data/mockSchedules.js` — "지금" 기준 상대 시각으로 8개 |
 | 1분마다 갱신 | ✅ App.jsx `setInterval` |
-| GitHub | ✅ `github.com/Adam-park/guage-schedule` (Private, `main`) |
+| GitHub | ✅ `github.com/Adam-park/guage-schedule` (Public, `main`) — 과제 설명 PDF·source.html은 .gitignore로 제외 |
 | Vercel 배포 | ✅ https://guage-schedule.vercel.app (공개). `git push` → 자동 재배포 |
 
 배포별 URL(`...-<해시>-awe-park.vercel.app`)은 Vercel 팀 로그인 필요 — 정상. 공유는 `guage-schedule.vercel.app`.

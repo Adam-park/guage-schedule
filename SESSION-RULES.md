@@ -42,7 +42,7 @@
 
 - **이름**: Day Battery (화면 표기 영문 "Day Battery"). 작업 폴더는 `Guage-schedule`.
 - **스택**: React 19 + Vite + Tailwind v4. 저장 = localStorage. 백엔드 없음.
-- **GitHub**: `github.com/Adam-park/guage-schedule` (Private, 기본 브랜치 `main`). git 사용자 `Adam-park` / `zmdkdkt@gmail.com`.
+- **GitHub**: `github.com/Adam-park/guage-schedule` (**Public — 누구나 볼 수 있음**, 기본 브랜치 `main`). 과제 설명 PDF·`source.html`은 `.gitignore`로 제외(푸시 금지). git 사용자 `Adam-park` / `zmdkdkt@gmail.com`.
 - **배포**: https://guage-schedule.vercel.app — `git push` 하면 자동 재배포 (Vercel 프로젝트 `awe-park/guage-schedule`). `.vercel/` 는 gitignore됨.
 - **도구**: 데스크톱엔 Vercel 토큰 있음 → `npx vercel ...` 바로 됨. `gh` CLI 없음 → GitHub repo 생성은 사용자가 웹에서. 노트북에서 `npx vercel` 쓰려면 `npx vercel login` 한 번 필요(자동 배포엔 불필요).
 
