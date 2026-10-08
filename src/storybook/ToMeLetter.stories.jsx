@@ -1,6 +1,6 @@
 // 편지 작성 화면 시안 비교 — 각 화면에서 직접 입력해 보기. 처음부터 다시 보려면 '다시 보기'
 import { useState } from 'react'
-import LetterWriteScreen from '../screens/LetterWriteScreen.jsx'
+import LetterWriteScreen from './legacy/LetterWriteScreenBefore.jsx'
 import { LetterA, LetterB, LetterC, LetterFinal } from './tome/letter.jsx'
 
 function Phone({ label, sub, children }) {

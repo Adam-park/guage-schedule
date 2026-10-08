@@ -1,19 +1,39 @@
 # 이어서 작업하기 (데스크탑 ↔ 노트북 핸드오프)
 
 > 이 파일 = "다른 컴퓨터에서 이 프로젝트 이어받는 법". 설계·규칙은 [`CLAUDE.md`](./CLAUDE.md) 참조.
-> 마지막 작업일: 2026-10-08 (TO ME 화면을 Storybook으로 하나씩 확정 중 — 아래 최신 항목 참조)
+> 마지막 작업일: 2026-10-08 밤 (TO ME 확정 화면 12개를 앱 코드로 이전 완료 — 아래 최신 항목 참조)
 
 ---
 
 ## 0. 세션 기록
 
-### ⏩ 다음 세션 시작하면 바로 할 일 (2026-10-08 새벽, 컨텍스트 한도로 세션 교체)
+### ⏩ 다음 세션 시작하면 바로 할 일 (2026-10-08 밤 작성, 10/9 갱신)
+
+**1. [완료 10/9] 커밋·푸시** — `36801c7`(과제 PDF 비공개) + 10/8 코드 작업 커밋 모두 GitHub에 올림. 푸시 서버 오류는 10/9엔 재발 안 함
+- ⚠️ 저장소는 **Public**. 과제 설명 PDF·`source.html`은 `.gitignore`로 제외돼 있음 — 다시 넣지 말 것
+- 계속 커밋에서 뺄 것: `src/stories/`, `public/assets/pixelart/envelope-open-v*`·`mailbox-c1~c3`
+- 3단계(Figma 화면 조립) 프롬프트: 사용자가 10/9에 줬으나 **보류** — 과제는 이미 제출, 목적은 'Figma에 컴포넌트 펼쳐 놓고 병렬 수정'. 재개 시 대상 화면을 TO ME로 다시 정하고 1단계부터(기록: docs/figma-import-state.json, docs/tome-intro-state.json)
+
+**2. 사용자가 정할 미결 (사용자가 "아직도 이렇게 많냐"고 함 — 하나씩 짧게 물을 것)**
+- 반송함 '다시 보내기'(버튼 위치 + 하루 3통 포함?) / 배송 완료함 아이디어(이번 주 예정)
+- 반송함 배지 ↔ 깃발 겹침, 상세 화면 알림이 봉투 위에 걸침
+- 온보딩 문구 "해낼"·"배송" ↔ 편지 작성 표현 맞출지
+- 앱 기본 주소(`/`)가 아직 옛 Day Battery 화면 — TO ME(`?screen=tome`)를 기본으로 할지
+- 안 쓰는 옛 코드 정리(Hearth·Pyre·러너·PhotoSetup·MeBook·AfterToday 등) — 삭제 전 확인
+
+**오늘(10/8 밤) 한 것** — 전부 Storybook 휴대폰 틀에서 Playwright로 눌러 보며 검수함
+- 확정 화면 12개 앱 이전: `src/screens/`(LetterWrite·Status·LetterDetail·ReturnBin·Weekly·DayEnd), 흐름 `src/TomeApp.jsx`, 계산·저장 `src/lib/letters.js`, 부품 `src/components/tome/`. Storybook 파일은 이 코드를 가져다 씀(중복 없음)
+- Storybook `1 확정 화면` 맨 위 **00 앱 흐름**(실제 코드, 규칙대로 시작) / **00-2 편지 작성부터**. 오른쪽 아래 '기록 지우고 시작' = 확인용(사용자 OK, 남겨둠)
+- 규칙: 나가기 → 배송 상태 목록 / 쓰다 나가면 쓰던 내용 버림 / 빈 목록 가운데·1~2통 목록 아래 '편지 쓰기' / 하루 3통(다시 들어와도 유지) / 3통 완료 안내 = "첫 편지는 HH:MM에 도착해요."(가장 이른 도착) / 시간 칸 = [오전 ▲▼][시]:[분] / 처음 쓰는 사람 = 인트로→온보딩, 이미 쓰는 사람의 그날 첫 실행 = 인트로→편지 작성, 같은 날 재실행 = 목록(하루 마무리→주간 리마인드 순으로 먼저 확인)
+- 확인 버튼 위치 고정: 하루 마무리·주간 리마인드(글 칸 높이 미리 잡음)
+
+### (이전) 다음 세션 할 일 (2026-10-08 새벽) — 1·2번 처리됨, 푸시만 남음
 
 **상태**: 커밋 `c139c87`까지 GitHub에 푸시 완료. 그 뒤 **제출본 PDF 수정분이 커밋·푸시 안 된 채** 남아 있음.
 
 **남은 마무리 (순서대로)**
 1. 사용자가 PDF 최종 확인 — `submission-shots/tome-flow-1008/TO-ME-하루흐름.pdf` (7쪽: 1쪽 설명 / 2~3쪽 비포·애프터 / 4~7쪽 하루 흐름 21장면). 원본 `source.html`, 21장면 이미지 `pdf/` 폴더
-2. [완료 10/8] 커밋 + 푸시 — 대상: `submission-shots/tome-flow-1008/`(pdf/ 21장·01~10 이미지), `HANDOFF.md`. **PDF·source.html은 비공개라 .gitignore로 제외(내 컴퓨터에만 있음)**. 커밋에서 뺄 것: `src/stories/`, `public/assets/pixelart/envelope-open-v1~v4·v3-noseal-a/b`, `mailbox-c1~c3`(사용자가 "그대로 두자"고 함 — 지우지도 커밋하지도 말 것)
+2. [커밋 완료 `36801c7`, ⚠️ 푸시 실패 — GitHub "Internal Server Error"로 계속 거절됨. 다음 세션에서 `git push origin main` 재시도할 것] 커밋 + 푸시 — 대상: `submission-shots/tome-flow-1008/`(pdf/ 21장·01~10 이미지), `HANDOFF.md`. **PDF·source.html은 비공개라 .gitignore로 제외(내 컴퓨터에만 있음)**. 커밋에서 뺄 것: `src/stories/`, `public/assets/pixelart/envelope-open-v1~v4·v3-noseal-a/b`, `mailbox-c1~c3`(사용자가 "그대로 두자"고 함 — 지우지도 커밋하지도 말 것)
 3. 푸시가 "Internal Server Error"로 거절되면 `git -c http.postBuffer=524288000 push origin main`로 재시도(10/8에 이걸로 성공)
 
 **제출본 규칙 (이번 세션에서 확정)**
