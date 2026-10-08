@@ -37,8 +37,8 @@ export default function DayEnd({ day, onClose }) {
     <Screen>
       <Title />
       <BigEnvelope sparkle={done.length > 0} />
-      {/* 글 칸 높이를 가장 긴 경우(2통 도착+1통 반송: 26+12+44+12+16)로 미리 잡아, 확인 버튼이 날마다 같은 위치에 오게 함 */}
-      <div className="font-pixel mt-2 flex h-[110px] w-full flex-col items-center gap-3 text-center">
+      {/* 확인 버튼 = 편지 상세 '배송 완료?' 버튼과 같은 위치: 제목 칸 높이 72px 고정(두 줄 제목 52px도 들어감), 목록은 버튼 아래 */}
+      <div className="font-pixel mt-2 flex w-full flex-col items-center text-center" style={{ height: 72 }}>
         {/* 3통 모두 반송된 날: 같은 화면, 설명만 다르게 (반짝임 없음) */}
         <span className="text-base leading-relaxed text-ink">
           {done.length > 0 ? (
@@ -51,15 +51,17 @@ export default function DayEnd({ day, onClose }) {
             </>
           )}
         </span>
+      </div>
+      <div className="w-full">
+        <CloseButton onClose={onClose} />
+      </div>
+      <div className="font-pixel mt-4 flex w-full flex-col items-center gap-3 text-center">
         <ul className="flex flex-col gap-1 text-sm text-ink-dim">
           {done.map((l) => (
             <li key={l.id}>{l.title}</li>
           ))}
         </ul>
         {returned.length > 0 && <span className="text-xs text-ink-faint">{returned.length}통은 반송함에 있어요</span>}
-      </div>
-      <div className="mt-6 w-full">
-        <CloseButton onClose={onClose} />
       </div>
     </Screen>
   )

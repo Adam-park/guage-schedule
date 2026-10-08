@@ -49,7 +49,14 @@ export function StatusList({ letters, now, doneIds, onSelect, onWrite, stateLabe
           const tone = st === 'returned' ? 'text-state-returned' : st === 'done' ? 'text-state-delivered' : 'text-ink-faint'
           return (
             <button key={l.id} type="button" onClick={() => onSelect?.(i)} className="-mx-2 flex items-center gap-4 rounded-md px-2 py-2 text-left active:scale-[.98] active:bg-surface-sunken">
-              <EnvelopeArt />
+              {/* 봉투 왼쪽 위 편지 번호 — 알림 "N번 편지가…"의 N이 어느 편지인지 보이게 */}
+              <div className="relative shrink-0">
+                <EnvelopeArt />
+                {/* 숫자만, 봉투 아이콘 왼쪽 위 바깥 (동그라미·테두리 없음) */}
+                <span className="font-pixel absolute text-xs leading-none text-ink tabular-nums" style={{ right: '100%', bottom: '100%', marginRight: 1, marginBottom: 1 }}>
+                  {i + 1}
+                </span>
+              </div>
               <div className="font-pixel flex min-w-0 flex-1 flex-col gap-1.5">
                 <div className="flex items-baseline justify-between gap-2">
                   <span className="truncate text-sm text-ink">{l.title}</span>
