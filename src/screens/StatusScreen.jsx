@@ -27,7 +27,7 @@ export function Notice({ children }) {
 
 // 목록만 (Storybook 흐름에서도 사용). 보낸 편지가 없으면 가운데에 안내 + '편지 쓰기' (나가기를 잘못 눌러 온 사람도 길을 잃지 않게)
 // 1~2통이면 목록 아래에 '편지 쓰기' (3통 채우면 사라짐). onWrite가 없으면(Storybook 시안) 버튼 없음
-export function StatusList({ letters, now, doneIds, onSelect, onWrite }) {
+export function StatusList({ letters, now, doneIds, onSelect, onWrite, stateLabels }) {
   const notices = noticesFor(letters, now, doneIds)
   return (
     <Frame>
@@ -56,7 +56,7 @@ export function StatusList({ letters, now, doneIds, onSelect, onWrite }) {
                   <span className="shrink-0 text-xs text-ink-dim tabular-nums">{hhmm(l.dueAt)}</span>
                 </div>
                 <PixelGauge cells={stateCells(l, now, st)} height={16} />
-                <span className={`text-xs ${tone}`}>{stateText(l, now, st)}</span>
+                <span className={`text-xs ${tone}`}>{stateText(l, now, st, stateLabels)}</span>
               </div>
             </button>
           )

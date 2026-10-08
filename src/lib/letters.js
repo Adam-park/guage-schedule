@@ -42,8 +42,9 @@ export const stateCells = (l, now, st, blink = false, n = 10) => {
     i < filled ? `${GAUGE_COLOR[st]}${blink && moving(st) && i === filled - 1 ? ' tome-cell-blink' : ''}` : null,
   )
 }
-const STATE_TEXT = { arrived: '도착했어요', done: '배송 완료!', returned: '반송됨' }
-export const stateText = (l, now, st) => (moving(st) ? left(l, now) : STATE_TEXT[st])
+export const STATE_TEXT = { arrived: '도착했어요', done: '배송 완료!', returned: '반송됨' }
+// labels: Storybook 문구 비교용 (앱에선 기본값)
+export const stateText = (l, now, st, labels = STATE_TEXT) => (moving(st) ? left(l, now) : labels[st])
 
 export function noticesFor(letters, now, doneIds) {
   return letters.flatMap((l, i) => {

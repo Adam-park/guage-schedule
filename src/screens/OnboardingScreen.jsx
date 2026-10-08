@@ -9,19 +9,20 @@ import EnvelopeSparkle from '../components/tome/EnvelopeSparkle.jsx'
 const STEPS = [
   '오늘 하루, 시간대마다\n그 시간의 내가 있어요.',
   '아침의 나, 오후의 나, 저녁의 나.\n이 사실을 아는 건 현재의 나 바로 당신뿐이에요.',
-  '현재의 나는 미래의 나를 위해\n오늘 해낼 일을 편지에 적어요.',
-  '할 일과 해낼 시간을 적고\n배송을 누르면 약속이 시작돼요.',
+  '현재의 나는 미래의 나를 위해\n오늘 할 일을 편지에 적어요.',
+  '할 일과 시간을 적고\n배송을 누르면 약속이 시작돼요.',
   '시간 안에 해내고 배송 완료를 누르면\n편지가 미래의 나에게 도착해요.',
   '해내지 못한 일정은 반송함으로 돌아와요.\n반송된 편지는 그 시간의 나에게 닿지 못해요.',
   '하루에 보낼 수 있는 편지는 3통.\n미래의 나는 그만큼 더 나아가요.',
 ]
-const LAST = STEPS.length - 1
 
-export default function OnboardingScreen({ onDone }) {
-  const [step, setStep] = useState(0)
+// steps·initialStep: Storybook 문구 비교용 (앱에선 기본값)
+export default function OnboardingScreen({ onDone, steps = STEPS, initialStep = 0 }) {
+  const [step, setStep] = useState(initialStep)
+  const LAST = steps.length - 1
   const done = step === LAST
   // 진행 중 = 배송 중 파랑, 다 차면 = 배송 완료 연한 초록(green-300)
-  const cells = STEPS.map((_, i) => (done ? 'bg-green-300' : i <= step ? 'bg-state-due' : null))
+  const cells = steps.map((_, i) => (done ? 'bg-green-300' : i <= step ? 'bg-state-due' : null))
 
   return (
     <div
@@ -39,7 +40,7 @@ export default function OnboardingScreen({ onDone }) {
 
       {/* 14px 두 줄 = 14 × 1.625(leading-relaxed) × 2 ≈ 46px */}
       <div className="flex h-[46px] w-full items-start justify-center">
-        <p className="font-pixel whitespace-pre-line break-keep text-sm leading-relaxed text-ink">{STEPS[step]}</p>
+        <p className="font-pixel whitespace-pre-line break-keep text-sm leading-relaxed text-ink">{steps[step]}</p>
       </div>
 
       <div className="flex h-12 w-full items-center justify-center">
