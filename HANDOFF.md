@@ -18,8 +18,8 @@
 - 반송함 '다시 보내기'(버튼 위치 + 하루 3통 포함?) / 배송 완료함 아이디어(이번 주 예정)
 - 반송함 배지 ↔ 깃발 겹침, 상세 화면 알림이 봉투 위에 걸침
 - 온보딩 문구 "해낼"·"배송" ↔ 편지 작성 표현 맞출지
-- 앱 기본 주소(`/`)가 아직 옛 Day Battery 화면 — TO ME(`?screen=tome`)를 기본으로 할지
-- 안 쓰는 옛 코드 정리(Hearth·Pyre·러너·PhotoSetup·MeBook·AfterToday 등) — 삭제 전 확인
+- [완료 10/9] 앱 기본 주소 = TO ME. 옛 Day Battery 달력은 `?screen=day-battery`
+- [결정 10/9] 옛 코드(Hearth·Pyre·러너·PhotoSetup·MeBook·AfterToday·App 달력 등)는 **지우지 않음** — 디자인 진행 과정 파악용. 정리 제안도 하지 말 것
 
 **오늘(10/8 밤) 한 것** — 전부 Storybook 휴대폰 틀에서 Playwright로 눌러 보며 검수함
 - 확정 화면 12개 앱 이전: `src/screens/`(LetterWrite·Status·LetterDetail·ReturnBin·Weekly·DayEnd), 흐름 `src/TomeApp.jsx`, 계산·저장 `src/lib/letters.js`, 부품 `src/components/tome/`. Storybook 파일은 이 코드를 가져다 씀(중복 없음)
