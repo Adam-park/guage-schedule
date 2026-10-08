@@ -58,7 +58,8 @@ export function ReturnBinList({ letters, onSelect = () => {}, onBack }) {
             {items.map(({ l, i }) => (
               <button key={l.id} type="button" onClick={() => onSelect(i)} className="-mx-2 flex items-center gap-4 rounded-md px-2 py-2 text-left active:scale-[.98] active:bg-surface-sunken">
                 <EnvelopeArt />
-                <div className="font-pixel flex min-w-0 flex-1 items-baseline justify-between gap-2">
+                {/* 눈에 보이는 봉투는 칸(57px) 위쪽 43px만 차지 → 글자를 그 가운데에 맞추려고 아래 여백 14px(가운데가 7px 위로) */}
+                <div className="font-pixel mb-[14px] flex min-w-0 flex-1 items-baseline justify-between gap-2">
                   <span className="truncate text-sm text-ink">{l.title}</span>
                   <span className="shrink-0 text-xs text-ink-dim tabular-nums">{hhmm(l.dueAt)}</span>
                 </div>

@@ -46,11 +46,11 @@ function Wind({ mode }) {
   )
 }
 
-export default function LetterWriteScreen({ wind = 'trail', sentDues = [], onSend, onExit }) {
+export default function LetterWriteScreen({ wind = 'trail', sentDues = [], initialTitle = '', onSend, onExit }) {
   const [dues, setDues] = useState(sentDues) // 보낸 편지들의 도착 시각
   const count = dues.length
   const [phase, setPhase] = useState(sentDues.length >= MAX_LETTERS ? 'done' : 'closed') // closed → open → folding → flying → (다음) open / done
-  const [title, setTitle] = useState('')
+  const [title, setTitle] = useState(initialTitle) // initialTitle: 다시 보내기 시안용(반송 편지 할 일 미리 채움)
   const [time, setTime] = useState('')
   const ready = title.trim() && time
 
