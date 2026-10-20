@@ -58,9 +58,10 @@ export default function WeeklyReminder({ arrived, waiting, onOpenBin, onClose })
         <span className="text-base text-ink">7일 동안 {arrived}통이 도착했어요</span>
         {waiting > 0 && <span className="text-xs text-ink-dim">반송함에 {waiting}통이 기다리고 있어요</span>}
       </div>
+      {/* '반송함 보기'는 테두리 2px만큼 안쪽 여백을 줄여(py-3) 다른 화면 버튼과 같은 높이 48px */}
       <div className="font-pixel mt-6 flex w-full gap-2">
         {waiting > 0 && (
-          <button type="button" onClick={onOpenBin} className="flex-1 rounded-lg border-2 border-ink bg-bg py-3.5 text-sm text-ink active:scale-[.98]">
+          <button type="button" onClick={onOpenBin} className="flex-1 rounded-lg border-2 border-ink bg-bg py-3 text-sm text-ink active:scale-[.98]">
             반송함 보기
           </button>
         )}

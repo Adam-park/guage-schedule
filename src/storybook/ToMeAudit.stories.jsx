@@ -49,7 +49,7 @@ export const Audit = {
           <Phone label="하루 마무리" sub="버튼 48px — 점선 안에 딱 맞음" guides>
             <DayEnd day={MOCK_DAY} />
           </Phone>
-          <Phone label="주간 리마인드 ← 다름" sub="버튼 52px — 아래 점선보다 4px 더 내려감" guides>
+          <Phone label="주간 리마인드 (10/20 수정)" sub="버튼 52px였음 → 48px로 맞춤, 점선 안에 딱 맞음" guides>
             <WeeklyReminder arrived={5} waiting={2} />
           </Phone>
         </div>
