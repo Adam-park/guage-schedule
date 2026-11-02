@@ -1,11 +1,12 @@
 // 확정 화면 — TO ME 하루 흐름 순서대로 (2026-10-08 정리)
 import { useState } from 'react'
-// 인트로·온보딩 = 실제 앱 코드(src/screens), 나머지 = Storybook 확정안(src/storybook/tome, 앱 반영 전)
+// 전부 실제 앱 코드(src/screens) 기준. 2026-11-02 기능 줄이기 반영
 import IntroScreen from '../screens/IntroScreen.jsx'
 import OnboardingScreen from '../screens/OnboardingScreen.jsx'
 import TomeApp from '../TomeApp.jsx'
 import { LetterFinal } from './tome/letter.jsx'
-import { StatusWithBin, StatusFlowV2, ReturnBinList, ReturnDetail, WeeklyReminder, MOCK_LETTERS, MOCK_RETURNED } from './tome/status.jsx'
+import { StatusWithBin, ReturnBinList, MOCK_LETTERS, MOCK_RETURNED } from './tome/status.jsx'
+import { StatusList } from '../screens/StatusScreen.jsx'
 import { DayEndA, MOCK_DAY } from './tome/dayend.jsx'
 
 const phone = (Story) => (
@@ -49,11 +50,14 @@ export const Intro = { name: '01 인트로 (앱 반영됨)', render: () => <Intr
 export const Onboarding = { name: '02 온보딩 (앱 반영됨)', render: () => <OnboardingScreen onDone={() => {}} /> }
 export const LetterWrite = { name: '03 편지 작성 · 보내기', render: () => <LetterFinal onExit={() => {}} /> }
 export const Status = { name: '04 배송 상태 목록 + 반송함 아이콘', render: () => <StatusWithBin weekArrived={0} /> }
-export const SoonAlert = { name: '05 마감 20분 전 알림 (편지를 눌러 상세)', render: () => <StatusFlowV2 now={T - 20} /> }
-export const Arrived = { name: '06 도착 · 배송 완료? (편지1을 눌러 상세)', render: () => <StatusFlowV2 now={T} /> }
-export const Returned = { name: '07 반송 (편지1을 눌러 상세)', render: () => <StatusFlowV2 now={T + 30} /> }
-export const Bin = { name: '08 반송함', render: () => <ReturnBinList letters={MOCK_RETURNED} /> }
-export const BinDetail = { name: '09 반송 편지 상세', render: () => <ReturnDetail letter={MOCK_RETURNED[0]} number={1} /> }
-export const Weekly = { name: '10 주간 리마인드', render: () => <WeeklyReminder arrived={5} waiting={2} /> }
+// 2026-11-02 기능 줄이기: 편지 상세·반송 상세·주간 리마인드 뺌 → 목록에서 바로 '배송 완료?' (예전 상세 흐름은 2 작업 기록에)
+function ListWithDone({ now }) {
+  const [doneIds, setDoneIds] = useState([])
+  return <StatusList letters={MOCK_LETTERS} now={now} doneIds={doneIds} onDone={(i) => setDoneIds((d) => [...d, MOCK_LETTERS[i].id])} />
+}
+export const SoonAlert = { name: '05 마감 20분 전 알림', render: () => <ListWithDone now={T - 20} /> }
+export const Arrived = { name: '06 도착 · 목록에서 바로 배송 완료?', render: () => <ListWithDone now={T} /> }
+export const Returned = { name: '07 반송', render: () => <ListWithDone now={T + 30} /> }
+export const Bin = { name: '08 반송함 (목록만)', render: () => <ReturnBinList letters={MOCK_RETURNED} /> }
 export const DayEnd = { name: '11 하루 마무리', render: () => <DayEndA /> }
 export const DayEndAllReturned = { name: '11-2 하루 마무리 (모두 반송된 날)', render: () => <DayEndA day={MOCK_DAY.map((l) => ({ ...l, result: 'returned' }))} /> }

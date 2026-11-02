@@ -5,10 +5,9 @@ import DayEnd, { BigEnvelope, Title, CloseButton, Screen } from '../../screens/D
 
 export { shouldShowDayEnd, markDayEndShown, resetDayEnd } from '../../screens/DayEndScreen.jsx'
 
-// 목데이터: 오늘 3통 — 2통 도착, 1통 반송
+// 목데이터: 오늘 2통 — 1통 도착, 1통 반송 (2026-11-02 하루 2통)
 export const MOCK_DAY = [
   { id: 1, title: '회의 자료 공유하기', due: '15:00', result: 'done' },
-  { id: 2, title: '운동 30분', due: '19:00', result: 'done' },
   { id: 3, title: '책 10쪽 읽기', due: '22:00', result: 'returned' },
 ]
 

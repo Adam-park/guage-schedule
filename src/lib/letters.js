@@ -1,6 +1,9 @@
 // TO ME 편지 — 시간 계산(순수 함수) + 이 기기 저장(localStorage)
 // 시각은 '그날 자정부터 몇 분'(예: 15:00 = 900)으로 다룸. 편지 하나: { id, title, date, sentAt, dueAt, done }
 
+// 하루에 보낼 수 있는 편지 수 (2026-11-02: 3통 → 2통, 선택 부담 줄이기). 이 숫자 하나만 바꾸면 모든 화면에 반영
+export const DAILY_LIMIT = 2
+
 export const hhmm = (min) => `${String(Math.floor(min / 60)).padStart(2, '0')}:${String(min % 60).padStart(2, '0')}`
 export const toMin = (time) => {
   const [h, m] = time.split(':').map(Number)
@@ -50,7 +53,7 @@ export function noticesFor(letters, now, doneIds) {
   return letters.flatMap((l, i) => {
     const st = letterState(l, now, doneIds.includes(l.id))
     if (st === 'soon') return [`${i + 1}번 편지가 배송되기 ${l.dueAt - now}분 전입니다`]
-    if (st === 'arrived' && now >= l.dueAt + REMIND_AFTER) return [`${i + 1}번 편지가 아직 배송 완료되지 않았어요`]
+    // (2026-11-02 기능 줄이기) 마감 10분 뒤 '아직 배송 완료되지 않았어요' 알림은 뺌 — 재촉 느낌, 반송으로 충분
     return []
   })
 }

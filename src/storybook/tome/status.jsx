@@ -14,13 +14,12 @@ import { DayEndA, shouldShowDayEnd, markDayEndShown } from './dayend.jsx'
 
 export { ReturnBinList, ReturnDetail, WeeklyReminder, simulateWeekPassed }
 
-// ---- 목데이터 (Storybook 확인용, 고정 시각) — 오전 9시에 3통 보냄, 지금 오후 2시 ----
+// ---- 목데이터 (Storybook 확인용, 고정 시각) — 오전 9시에 2통 보냄, 지금 오후 2시 (2026-11-02 하루 2통) ----
 const at = (h, m = 0) => h * 60 + m
 export const NOW = at(14)
 export const MOCK_LETTERS = [
   { id: 1, title: '회의 자료 공유하기', sentAt: at(9), dueAt: at(15) },
   { id: 2, title: '운동 30분', sentAt: at(9), dueAt: at(19) },
-  { id: 3, title: '책 10쪽 읽기', sentAt: at(9), dueAt: at(22) },
 ]
 
 // 10칸 게이지: 지난 비율만큼 파랑

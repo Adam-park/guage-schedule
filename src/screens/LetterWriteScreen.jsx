@@ -1,13 +1,13 @@
-// 편지 작성 화면 — Storybook 확정안 A (2026-10-07). 할 일·할 시간 입력 → 보내기, 하루 3통까지.
+// 편지 작성 화면 — Storybook 확정안 A (2026-10-07). 할 일·할 시간 입력 → 보내기, 하루 DAILY_LIMIT(2)통까지.
 // 보내기: ① 열린 봉투 → 닫힌 봉투(빨간 씰)로 다시 접힘 ② 봉투 왼쪽 뒤 꼬리선 ③ 다음 편지가 빈 속지로 다시 열림 (번호 +1)
-// 3통 다 보내면 닫힌 봉투 + 안내 문구. onSend({ title, time }): 보낸 편지 1통 / onExit: 왼쪽 위 '나가기'
-// sentDues: 오늘 이미 보낸 편지들의 도착 시각(분) — 다시 들어와도 하루 3통을 넘지 않게 + 완료 안내의 '첫 편지' 시각
+// 하루 몫을 다 보내면 닫힌 봉투 + 안내 문구. onSend({ title, time }): 보낸 편지 1통 / onExit: 왼쪽 위 '나가기'
+// sentDues: 오늘 이미 보낸 편지들의 도착 시각(분) — 다시 들어와도 하루 몫을 넘지 않게 + 완료 안내의 '첫 편지' 시각
 import { useEffect, useState } from 'react'
 import LetterEnvelope, { revealFor } from '../components/tome/LetterEnvelope.jsx'
 import TimeField from '../components/tome/TimeField.jsx'
-import { hhmm, toMin, nowMin } from '../lib/letters.js'
+import { hhmm, toMin, nowMin, DAILY_LIMIT } from '../lib/letters.js'
 
-const MAX_LETTERS = 3
+const MAX_LETTERS = DAILY_LIMIT
 const WIND_CSS = `
 @keyframes tome-wind-ltr { from { transform: translateX(-140px) } to { transform: translateX(520px) } }
 @keyframes tome-wind-rtl { from { transform: translateX(520px) } to { transform: translateX(-140px) } }
@@ -46,10 +46,16 @@ function Wind({ mode }) {
   )
 }
 
-export default function LetterWriteScreen({ wind = 'trail', sentDues = [], initialTitle = '', onSend, onExit }) {
+// extraOffer (시안, 2026-11-02 '하나 더 보내기'): 기본은 하루 1통, 보낸 뒤 1통 더 보낼 수 있음
+//   'first' = 처음 쓰는 날 — 1통 보낸 뒤 안내 "하나 더 보낼 수 있어요" + [오늘은 여기까지] [하나 더 쓰기]
+//   'later' = 그다음 날부터 — 1통 보낸 뒤 질문 없이 작은 '하나 더 보내기'만 / 없으면 예전처럼 처음부터 2칸(카운터 1/2)
+// writeNow: 목록의 '하나 더 보내기'로 들어왔을 때 — '보냈어요' 화면을 건너뛰고 바로 쓰기
+export default function LetterWriteScreen({ wind = 'trail', sentDues = [], initialTitle = '', extraOffer, writeNow, onSend, onExit }) {
   const [dues, setDues] = useState(sentDues) // 보낸 편지들의 도착 시각
   const count = dues.length
-  const [phase, setPhase] = useState(sentDues.length >= MAX_LETTERS ? 'done' : 'closed') // closed → open → folding → flying → (다음) open / done
+  const afterFirst = extraOffer === 'first' ? 'offer' : 'rest' // 1통 보낸 뒤 화면
+  // closed → open → folding → flying → (다음) open / offer / rest / done
+  const [phase, setPhase] = useState(sentDues.length >= MAX_LETTERS ? 'done' : extraOffer && sentDues.length === 1 && !writeNow ? 'rest' : 'closed')
   const [title, setTitle] = useState(initialTitle) // initialTitle: 다시 보내기 시안용(반송 편지 할 일 미리 채움)
   const [time, setTime] = useState('')
   const ready = title.trim() && time
@@ -68,7 +74,7 @@ export default function LetterWriteScreen({ wind = 'trail', sentDues = [], initi
     setDues([...dues, toMin(time)])
     setTitle('')
     setTime('')
-    setPhase(n >= MAX_LETTERS ? 'done' : 'closed')
+    setPhase(n >= MAX_LETTERS ? 'done' : extraOffer && n === 1 ? afterFirst : 'closed')
   }, [phase]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const open = phase === 'open'
@@ -86,9 +92,39 @@ export default function LetterWriteScreen({ wind = 'trail', sentDues = [], initi
       </button>
       {phase === 'flying' && <Wind mode={wind} />}
       <LetterEnvelope open={open} reveal={revealFor(title, time)} />
-      {phase === 'done' ? (
+      {phase === 'offer' ? (
+        <>
+          {/* 버튼 위치 = 편지 상세·하루 마무리 버튼과 같은 줄 (글 칸 72px 고정) */}
+          <div className="font-pixel mt-2 flex w-full flex-col items-center text-center" style={{ height: 72 }}>
+            <span className="text-sm leading-relaxed text-ink">오늘 편지를 하나 더 보낼 수 있어요.</span>
+          </div>
+          <div className="font-pixel flex w-full gap-2">
+            <button type="button" onClick={() => setPhase('rest')} className="flex-1 rounded-lg border-2 border-ink bg-bg py-3 text-sm text-ink active:scale-[.98]">
+              오늘은 여기까지
+            </button>
+            <button type="button" onClick={() => setPhase('closed')} className="flex-1 rounded-lg bg-ink py-3.5 text-sm text-white active:scale-[.98]">
+              하나 더 쓰기
+            </button>
+          </div>
+        </>
+      ) : phase === 'rest' ? (
+        <div className="font-pixel mt-2 flex w-full flex-col items-center text-center">
+          <p className="text-sm leading-relaxed text-ink">
+            오늘 편지를 보냈어요.
+            {firstDue !== null && (
+              <>
+                <br />
+                <span className="text-ink-dim">첫 편지는 {hhmm(firstDue)}에 도착해요.</span>
+              </>
+            )}
+          </p>
+          <button type="button" onClick={() => setPhase('closed')} className="mt-2 flex h-11 items-center gap-1 px-3 text-xs text-ink-dim active:scale-[.97]">
+            하나 더 보내기 <span aria-hidden>→</span>
+          </button>
+        </div>
+      ) : phase === 'done' ? (
         <p className="font-pixel mt-2 text-center text-sm leading-relaxed text-ink">
-          오늘 편지 3통을 모두 보냈어요.
+          오늘 편지 {MAX_LETTERS}통을 모두 보냈어요.
           {firstDue !== null && (
             <>
               <br />
@@ -100,7 +136,7 @@ export default function LetterWriteScreen({ wind = 'trail', sentDues = [], initi
         <div className="font-pixel mt-2 flex w-full flex-col gap-3">
           <label className="flex flex-col gap-1 text-xs text-ink-dim">
             <span className="flex justify-between">
-              오늘 할 일<span className="tabular-nums text-ink">{Math.min(count + 1, MAX_LETTERS)}/{MAX_LETTERS}</span>
+              오늘 할 일{!extraOffer && <span className="tabular-nums text-ink">{Math.min(count + 1, MAX_LETTERS)}/{MAX_LETTERS}</span>}
             </span>
             <input value={title} onChange={(e) => setTitle(e.target.value)} disabled={busy} placeholder="예) 기획서 초안 끝내기" className="rounded-md border-2 border-ink bg-bg px-3 py-2.5 text-sm text-ink outline-none placeholder:text-ink-faint" />
           </label>

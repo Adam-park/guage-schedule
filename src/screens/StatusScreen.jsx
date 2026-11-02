@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import PixelGauge from '../components/tome/PixelGauge.jsx'
 import EnvelopeArt from '../components/tome/EnvelopeArt.jsx'
 import MailboxButton from '../components/tome/MailboxButton.jsx'
-import { hhmm, todayLabel, letterState, stateCells, stateText, noticesFor, nowMin, loadLetters, todayLetters, returnedLetters } from '../lib/letters.js'
+import { hhmm, todayLabel, letterState, stateCells, stateText, noticesFor, nowMin, loadLetters, todayLetters, returnedLetters, markDone, DAILY_LIMIT } from '../lib/letters.js'
 
 export function Header({ count }) {
   return (
@@ -12,7 +12,8 @@ export function Header({ count }) {
       <span className="text-xs text-ink-dim">{todayLabel()}</span>
       <div className="flex items-baseline justify-between">
         <span className="text-sm text-ink">배송 중인 편지</span>
-        <span className="text-xs text-ink-dim tabular-nums">{count}/3</span>
+        {/* 보낸 통수만 (하루 몫 "/2"는 미리 안 보여줌 — 1통 보낸 뒤 '하나 더'로 알게 함, 2026-11-02) */}
+        <span className="text-xs text-ink-dim tabular-nums">{count}통</span>
       </div>
     </div>
   )
@@ -26,8 +27,9 @@ export function Notice({ children }) {
 }
 
 // 목록만 (Storybook 흐름에서도 사용). 보낸 편지가 없으면 가운데에 안내 + '편지 쓰기' (나가기를 잘못 눌러 온 사람도 길을 잃지 않게)
-// 1~2통이면 목록 아래에 '편지 쓰기' (3통 채우면 사라짐). onWrite가 없으면(Storybook 시안) 버튼 없음
-export function StatusList({ letters, now, doneIds, onSelect, onWrite, stateLabels }) {
+// 하루 몫보다 적게 보냈으면 목록 아래에 '하나 더 보내기' (다 채우면 사라짐). 아직 0통이면 가운데 '편지 쓰기'. onWrite가 없으면(Storybook 시안) 버튼 없음
+// onDone(i): 마감 시간이 된 편지 줄에 '배송 완료?' 버튼 (2026-11-02 편지 상세 화면 대신). onSelect: 예전 시안용(줄을 눌러 상세)
+export function StatusList({ letters, now, doneIds, onSelect, onDone, onWrite, stateLabels }) {
   const notices = noticesFor(letters, now, doneIds)
   return (
     <Frame>
@@ -47,8 +49,9 @@ export function StatusList({ letters, now, doneIds, onSelect, onWrite, stateLabe
         {letters.map((l, i) => {
           const st = letterState(l, now, doneIds.includes(l.id))
           const tone = st === 'returned' ? 'text-state-returned' : st === 'done' ? 'text-state-delivered' : 'text-ink-faint'
+          const Row = onSelect ? 'button' : 'div'
           return (
-            <button key={l.id} type="button" onClick={() => onSelect?.(i)} className="-mx-2 flex items-center gap-4 rounded-md px-2 py-2 text-left active:scale-[.98] active:bg-surface-sunken">
+            <Row key={l.id} {...(onSelect ? { type: 'button', onClick: () => onSelect(i) } : {})} className={`-mx-2 flex items-center gap-4 rounded-md px-2 py-2 text-left ${onSelect ? 'active:scale-[.98] active:bg-surface-sunken' : ''}`}>
               {/* 봉투 왼쪽 위 편지 번호 — 알림 "N번 편지가…"의 N이 어느 편지인지 보이게 */}
               <div className="relative shrink-0">
                 <EnvelopeArt />
@@ -63,15 +66,21 @@ export function StatusList({ letters, now, doneIds, onSelect, onWrite, stateLabe
                   <span className="shrink-0 text-xs text-ink-dim tabular-nums">{hhmm(l.dueAt)}</span>
                 </div>
                 <PixelGauge cells={stateCells(l, now, st)} height={16} />
-                <span className={`text-xs ${tone}`}>{stateText(l, now, st, stateLabels)}</span>
+                {st === 'arrived' && onDone ? (
+                  <button type="button" onClick={() => onDone(i)} className="self-start rounded-md bg-ink px-3 py-1.5 text-xs text-white active:scale-[.97]">
+                    배송 완료?
+                  </button>
+                ) : (
+                  <span className={`text-xs ${tone}`}>{stateText(l, now, st, stateLabels)}</span>
+                )}
               </div>
-            </button>
+            </Row>
           )
         })}
       </div>
-      {letters.length > 0 && letters.length < 3 && onWrite && (
+      {letters.length > 0 && letters.length < DAILY_LIMIT && onWrite && (
         <button type="button" onClick={onWrite} className="font-pixel w-full rounded-lg bg-ink py-3.5 text-sm text-white active:scale-[.98]">
-          편지 쓰기
+          하나 더 보내기
         </button>
       )}
     </Frame>
@@ -79,8 +88,7 @@ export function StatusList({ letters, now, doneIds, onSelect, onWrite, stateLabe
 }
 
 // 목록 + 반송함 아이콘. 편지는 이 기기 저장소에서 읽고, 1분마다 다시 계산
-// (편지 상세 · 반송함 화면은 아직 앱에 없음 — 다음 단계에서 연결)
-export default function StatusScreen({ onSelect, onOpenBin, onWrite }) {
+export default function StatusScreen({ onOpenBin, onWrite }) {
   const [date, setDate] = useState(() => new Date())
   useEffect(() => {
     const t = setInterval(() => setDate(new Date()), 60 * 1000)
@@ -91,7 +99,16 @@ export default function StatusScreen({ onSelect, onOpenBin, onWrite }) {
   const doneIds = letters.filter((l) => l.done).map((l) => l.id)
   return (
     <div className="relative h-full">
-      <StatusList letters={letters} now={nowMin(date)} doneIds={doneIds} onSelect={onSelect} onWrite={onWrite} />
+      <StatusList
+        letters={letters}
+        now={nowMin(date)}
+        doneIds={doneIds}
+        onWrite={onWrite}
+        onDone={(i) => {
+          markDone(letters[i].id)
+          setDate(new Date())
+        }}
+      />
       <MailboxButton count={returnedLetters(all, date).length} onClick={onOpenBin} />
     </div>
   )

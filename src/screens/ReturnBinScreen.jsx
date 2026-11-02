@@ -1,7 +1,6 @@
 // 반송함 — Storybook 확정안 (2026-10-08). 배송 상태 목록 왼쪽 아래 우편함을 누르면 열림
 // 목록: 날짜별 묶음(날짜는 묶음 왼쪽 위에 한 번, 최근 날짜가 위, 길면 목록만 스크롤). 상세: 할 일 + 담담한 한 줄, 게이지 없음
 // 편지의 dayOffset: 0 = 오늘, -1 = 어제 … (앱에서는 저장된 date로 계산)
-import { useState } from 'react'
 import PixelEnvelope from '../components/tome/PixelEnvelope.jsx'
 import EnvelopeArt from '../components/tome/EnvelopeArt.jsx'
 import { Frame } from './StatusScreen.jsx'
@@ -40,7 +39,9 @@ function groupByDay(letters) {
     .map(([day, items]) => ({ day, items: items.sort((a, b) => a.l.dueAt - b.l.dueAt) }))
 }
 
-export function ReturnBinList({ letters, onSelect = () => {}, onBack }) {
+// onSelect 없으면 줄을 눌러도 아무 일 없음 (2026-11-02 반송 상세 화면 뺌, 예전 시안은 onSelect로 상세)
+export function ReturnBinList({ letters, onSelect, onBack }) {
+  const Row = onSelect ? 'button' : 'div'
   return (
     // 목록이 길어지면 안쪽 영역만 세로 스크롤 (← 버튼은 바깥에 두어 제자리 고정)
     <div className="relative h-full">
@@ -56,14 +57,14 @@ export function ReturnBinList({ letters, onSelect = () => {}, onBack }) {
           <section key={day} className="flex flex-col gap-1">
             <h3 className="font-pixel text-xs text-ink-dim">{dayLabel(day)}</h3>
             {items.map(({ l, i }) => (
-              <button key={l.id} type="button" onClick={() => onSelect(i)} className="-mx-2 flex items-center gap-4 rounded-md px-2 py-2 text-left active:scale-[.98] active:bg-surface-sunken">
+              <Row key={l.id} {...(onSelect ? { type: 'button', onClick: () => onSelect(i) } : {})} className={`-mx-2 flex items-center gap-4 rounded-md px-2 py-2 text-left ${onSelect ? 'active:scale-[.98] active:bg-surface-sunken' : ''}`}>
                 <EnvelopeArt />
                 {/* 눈에 보이는 봉투는 칸(57px) 위쪽 43px만 차지 → 글자를 그 가운데에 맞추려고 아래 여백 14px(가운데가 7px 위로) */}
                 <div className="font-pixel mb-[14px] flex min-w-0 flex-1 items-baseline justify-between gap-2">
                   <span className="truncate text-sm text-ink">{l.title}</span>
                   <span className="shrink-0 text-xs text-ink-dim tabular-nums">{hhmm(l.dueAt)}</span>
                 </div>
-              </button>
+              </Row>
             ))}
           </section>
         ))}
@@ -97,13 +98,8 @@ const offsetOf = (date, today = new Date()) => {
   return Math.round((new Date(y, m - 1, d) - new Date(today.getFullYear(), today.getMonth(), today.getDate())) / 86400000)
 }
 
-// 반송함 목록 ↔ 상세. 편지는 이 기기 저장소에서 읽음
+// 반송함 목록만 (2026-11-02 기능 줄이기: 반송 편지 상세는 뺌 — ReturnDetail은 예전 시안 기록용으로 남김). 편지는 이 기기 저장소에서 읽음
 export default function ReturnBinScreen({ onBack }) {
-  const [sel, setSel] = useState(null)
-  // 목록에 보이는 순서(최근 날짜 위, 같은 날은 시간 순)로 정렬 — '반송 편지N' 번호가 보이는 순서와 맞게
-  const letters = returnedLetters(loadLetters())
-    .map((l) => ({ ...l, dayOffset: offsetOf(l.date) }))
-    .sort((a, b) => b.dayOffset - a.dayOffset || a.dueAt - b.dueAt)
-  if (sel !== null && letters[sel]) return <ReturnDetail letter={letters[sel]} number={sel + 1} onBack={() => setSel(null)} />
-  return <ReturnBinList letters={letters} onSelect={setSel} onBack={onBack} />
+  const letters = returnedLetters(loadLetters()).map((l) => ({ ...l, dayOffset: offsetOf(l.date) }))
+  return <ReturnBinList letters={letters} onBack={onBack} />
 }

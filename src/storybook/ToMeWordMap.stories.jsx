@@ -86,7 +86,7 @@ export const WordMap = {
           <LetterWriteScreen />
         </Item>
         <Item n={4} where="편지 작성 — 3통 다 보낸 뒤 안내">
-          <LetterWriteScreen sentDues={[1439, 1439, 1439]} />
+          <LetterWriteScreen sentDues={[1439, 1439]} />
         </Item>
         <Item n={5} where="배송 상태 목록 — 마감 20분 전 알림">
           <StatusList letters={MOCK_LETTERS} now={L1.dueAt - 15} doneIds={[]} />
