@@ -58,7 +58,9 @@ export default function LetterWriteScreen({ wind = 'trail', sentDues = [], initi
   const [phase, setPhase] = useState(sentDues.length >= MAX_LETTERS ? 'done' : extraOffer && sentDues.length === 1 && !writeNow ? 'rest' : 'closed')
   const [title, setTitle] = useState(initialTitle) // initialTitle: 다시 보내기 시안용(반송 편지 할 일 미리 채움)
   const [time, setTime] = useState('')
-  const ready = title.trim() && time
+  // 지금보다 이른(같은) 시각은 보내지 않음 — 보내자마자 반송되고 하루 몫이 줄어드는 것 방지 (2026-11-04)
+  const past = time && toMin(time) <= nowMin()
+  const ready = title.trim() && time && !past
 
   useEffect(() => {
     const next = { closed: ['open', 500], folding: ['flying', 350], flying: ['sent', 1500] }[phase]
@@ -142,7 +144,10 @@ export default function LetterWriteScreen({ wind = 'trail', sentDues = [], initi
           </label>
           {/* label이 아닌 div: 안에 버튼이 있어 '할 시간' 글자를 누르면 오전/오후가 바뀌는 것 방지 */}
           <div className="flex flex-col gap-1 text-xs text-ink-dim">
-            할 시간
+            {/* 안내는 '할 시간'과 같은 줄 오른쪽 — 보내기 버튼 위치가 안 움직이게 */}
+            <span className="flex justify-between">
+              할 시간{past && <span className="text-ink">지금 이후 시각을 적어 주세요</span>}
+            </span>
             <TimeField key={count} onChange={setTime} disabled={busy} />
           </div>
           <button
